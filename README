@@ -1,5 +1,5 @@
 Z-Ursae Majoris is a late-type, semi-regular red giant star (SRb). Magnitude typically varies by 2 magnitudes
-Amateur observations, primarily from AAVSO will becleaned up and compared to limited CCD data to determine
+Amateur observations, primarily from AAVSO & AFOEV will be cleaned up and compared to limited CCD data to determine
 its reliability, such that the nature of the aperiodicity can be determined (overtones of the fundamental frequency?).
 Given the shape of this data, a simple DFT or FFT is unlikely to work, and as such it is planned that the data will
 be binned and analysed using PDM, or "phase dispersion minimisation" using a python code
@@ -16,4 +16,17 @@ ________________________________________________________________________________
 ____________________________________________________________________________________
 
 Having read a paper on R Doradus by T.R. Bedding et al (Mode switching in the nearby Mira-like variable R Doradus), I have come across another technique to use alongside (or in place of?) phase dispersion minimisation. Paper refers to wavelet analysis- specifically
-Weighted Wavelet Z-transform (WWZ for frequency acquisition), and Weighted Wavelet Amplitude (WWA for Amplitude acquistion). The two are used in conjunction. 
+Weighted Wavelet Z-transform (WWZ for frequency acquisition), and Weighted Wavelet Amplitude (WWA for Amplitude acquistion). The two are used in conjunction.
+
+I have plotted recent data from the AFOEV database on ZUMa and removed what I have deemed 'inconsistent observers'; that is an observer named NTS whose observations were almost perfectly static and clear outliers. I have also removed the observers that I consider to be 'fairweather observers'- those with 10 or fewer observations. The data of the observers: NTS, DPV, STM, PRO, POY, BDJ,FSJ,BVE, CAS, AKG, ANC, GGU, HOK, BEN, STO, has been purged.
+
+The resulting plot was cleaner, although there are still muddy sections, even among the consistent observers. These
+consistent observers have been colour-coded in a spreadsheet, corresponding to the number of observations and/or their
+regularity of observation. I have attached two .png files which show the set prior-to, and post purge.
+
+Wed, 12 Sept 2018
+
+_____________________________________________________________________________________
+_____________________________________________________________________________________
+
+ 

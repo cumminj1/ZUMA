@@ -9,3 +9,11 @@ It may be possible to obtain spectrographic data of the star, however it is curr
 data will be useful.
 
 It may also be worth comparing this star to other stars with similar classifications such as MIRA or RV Tauri stars.
+
+Tue, 11 Sept 2018
+
+____________________________________________________________________________________
+____________________________________________________________________________________
+
+Having read a paper on R Doradus by T.R. Bedding et al (Mode switching in the nearby Mira-like variable R Doradus), I have come across another technique to use alongside (or in place of?) phase dispersion minimisation. Paper refers to wavelet analysis- specifically
+Weighted Wavelet Z-transform (WWZ for frequency acquisition), and Weighted Wavelet Amplitude (WWA for Amplitude acquistion). The two are used in conjunction. 

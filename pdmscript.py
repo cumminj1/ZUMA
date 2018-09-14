@@ -14,6 +14,10 @@ from PyAstronomy.pyTiming import pyPDM
 x = numpy.arange(100) / 100.0
 y = numpy.sin(x*2.0*numpy.pi*3.0 + 1.7)+numpy.sin(x*7.0*2.0*numpy.pi+1.7)++numpy.cos(x*11*2.0*numpy.pi+1.7)
 
+noise=numpy.random.normal(0,1,x.shape)
+y1=y+noise
+
+
 # Get a ``scanner'', which defines the frequency interval to be checked.
 # Alternatively, also periods could be used instead of frequency.
 S = pyPDM.Scanner(minVal=0.5, maxVal=20.0, dVal=0.01, mode="frequency")
@@ -22,7 +26,7 @@ S = pyPDM.Scanner(minVal=0.5, maxVal=20.0, dVal=0.01, mode="frequency")
 # (f, note that it is frequency, because the scanner's
 # mode is ``frequency'') and associated Theta statistic (t).
 # Use 10 phase bins and 3 covers (= phase-shifted set of bins).
-P = pyPDM.PyPDM(x, y)
+P = pyPDM.PyPDM(x, y1)
 f1, t1 = P.pdmEquiBinCover(3, 6, S)
 # For comparison, carry out PDM analysis using  bins (no covers).
 f2, t2 = P.pdmEquiBin(3, S)
@@ -32,7 +36,7 @@ f2, t2 = P.pdmEquiBin(3, S)
 #plt.figure(facecolor='white')
 plt.subplot(2,1,1)
 plt.title('convoluted sinusoidals')
-plt.plot(x,y)
+plt.scatter(x,y1)
 plt.legend(['freq=3,7,11'])
 
 plt.subplot(2,1,2)

@@ -42,4 +42,8 @@ Thurs, 13 Sept 2018
  
 ____________________________________________________________________________________
 ____________________________________________________________________________________
+Started day by modifiying the parameters of the AAVSO filtering script to suit the AFOEV amateur
+data. This Dataset has a large period of no measurement once fairweather observers are removed.
 
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/AFOEV_raw.png)
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/AFOEV_fairweather_removed.png)

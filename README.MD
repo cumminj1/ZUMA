@@ -29,7 +29,21 @@ Wed, 12 Sept 2018
 _____________________________________________________________________________________
 _____________________________________________________________________________________
 
-Spent the day working on a python script which reads the database, and allows for filtering by user by the number of datapoints they have contributed, and subsequently plots the new data. With the fairweather observers removed there is a much clearer sense of periodicity, however there is more to be done. I plan on binning data into 5-10 day intervals which will hopefully clear things up even further and then polish by removing any remaining outliers. This script should be easy to apply to AFOEV data, but has been thus far only applied to the AAVSO data.
+Spent the day working on a python script which reads the database, and allows for filtering by user by the number
+of datapoints they have contributed, and subsequently plots the new data. With the fairweather observers removed
+there is a much clearer sense of periodicity, however there is more to be done. I plan on binning data into 5-10
+day intervals which will hopefully clear things up even further and then polish by removing any remaining outliers.
+This script should be easy to apply to AFOEV data, but has been thus far only applied to the AAVSO data.
 
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/AAVSO_raw.png)
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/AAVSO_TOP_USERS.png)
 Thurs, 13 Sept 2018
  
+____________________________________________________________________________________
+____________________________________________________________________________________
+Started day by modifiying the parameters of the AAVSO filtering script to suit the AFOEV amateur
+data. This Dataset has a large period of no measurement once fairweather observers are removed.
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/AFOEV_raw.png)
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/AFOEV_fairweather_removed.png)

@@ -55,3 +55,11 @@ As can be seen from the image below, it would seem that the script is running as
 there is some small spread from the theoretical result.
 
 ![alt text](https://github.com/cumminj1/ZUMA/blob/master/pdm_3_7_11.png)
+
+Given this success I have added some moderate noise to the simulated data, to see if the pdm with
+the same settings is still able to discern the three frequencies.
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/pdm_3_7_11_noise.png)
+
+We can see that PDM has again, successfully identified the thre frequencies found within the convoluted 
+function, however the trough corresponding to f=11Hz is much shallower than the previous, noiseless version

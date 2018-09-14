@@ -47,3 +47,11 @@ data. This Dataset has a large period of no measurement once fairweather observe
 
 ![alt text](https://github.com/cumminj1/ZUMA/blob/master/AFOEV_raw.png)
 ![alt text](https://github.com/cumminj1/ZUMA/blob/master/AFOEV_fairweather_removed.png)
+
+I have been experimenting with the PyAstronomy package in python and using its built-in
+phase dispersion minimmisation module, and have tested it on artificial data. In this case 
+the data consisted of three convoluted sinusoidals, with freqeuncies of 3Hz, 7Hz, and 11Hz.
+As can be seen from the image below, it would seem that the script is running as hoped, although
+there is some small spread from the theoretical result.
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/pdm_3_7_11.png)

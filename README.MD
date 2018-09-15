@@ -62,4 +62,9 @@ the same settings is still able to discern the three frequencies.
 ![alt text](https://github.com/cumminj1/ZUMA/blob/master/pdm_3_7_11_noise.png)
 
 We can see that PDM has again, successfully identified the thre frequencies found within the convoluted 
-function, however the trough corresponding to f=11Hz is much shallower than the previous, noiseless version
+function, however the trough corresponding to f=11Hz is much shallower than the previous, noiseless version.
+
+Friday, 14 Sept 2018
+
+_______________________________________________________________________________________
+_______________________________________________________________________________________

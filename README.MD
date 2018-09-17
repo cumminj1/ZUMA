@@ -94,6 +94,9 @@ Want to clean up the number of datapoints, maybe with 1 month averages or 2 week
 inconsistency in the data points takes (large time gaps), not too sure what an effective way to implement
 this through code would be.
 
+Bit of a slow day because my CMOS for the telescope came and I was trying to set that up alongside
+the matching software for linux
+
 Monday, 17 Sept 2018
 
 ______________________________________________________________________________________

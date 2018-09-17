@@ -68,3 +68,27 @@ Friday, 14 Sept 2018
 
 _______________________________________________________________________________________
 _______________________________________________________________________________________
+In work
+
+Saturday, 15th Sept 2018
+_______________________________________________________________________________________
+_______________________________________________________________________________________
+In work 
+
+Sunday, 16th Sept 2018
+_______________________________________________________________________________________
+_______________________________________________________________________________________
+Upon first running of code, console returned an error with the importing of NUMPY which had had no issues prior.
+Spent a few hours troubleshooting, and realised that the IDE I was using was defaulting to python 3.4 
+while the system version was Python 2.7. Changing to an earlier version of the IDE was easier and 
+quicker than changing the systemwide version of python, so naturally that's what I did (given that all packages
+being used are fairly old, and built on 2.7). 
+
+Doing some preliminary testing with PDM on the data which I preciously cleaned up, however I'm not really
+expert enough yet to get good results, and so I am playing with the parameters of the PDM script to see how
+they change the results.
+
+Monday, 17 Sept 2018
+
+______________________________________________________________________________________
+______________________________________________________________________________________

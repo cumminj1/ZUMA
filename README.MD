@@ -88,6 +88,8 @@ Doing some preliminary testing with PDM on the data which I preciously cleaned u
 expert enough yet to get good results, and so I am playing with the parameters of the PDM script to see how
 they change the results.
 
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/not_enough_data_pdm.png)
+
 Monday, 17 Sept 2018
 
 ______________________________________________________________________________________

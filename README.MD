@@ -90,6 +90,10 @@ they change the results.
 
 ![alt text](https://github.com/cumminj1/ZUMA/blob/master/not_enough_data_pdm.png)
 
+Want to clean up the number of datapoints, maybe with 1 month averages or 2 week averages, but given the 
+inconsistency in the data points takes (large time gaps), not too sure what an effective way to implement
+this through code would be.
+
 Monday, 17 Sept 2018
 
 ______________________________________________________________________________________

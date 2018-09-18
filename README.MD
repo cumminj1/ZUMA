@@ -101,3 +101,12 @@ Monday, 17 Sept 2018
 
 ______________________________________________________________________________________
 ______________________________________________________________________________________
+
+
+Have been working on a function in AAVSO script which will allow to make 1 month averages etc.
+It's fairly rudimentary at the moment, going by number of entries rather than their values but
+should still work in datasets without large gaps. That said, it is returning an error which I
+will have to figure out: "ValueError: cannot set using a slice indexer with a different length 
+than the value". Been staring at it for too long so gonna go get some dinner.
+
+Tuesday, 18th Sept 2018

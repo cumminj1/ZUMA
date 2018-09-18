@@ -45,13 +45,13 @@ print(" ")
 #We create an empty list of approved users and "no" sets out how far down the list of most prolific we go
 #here 147 is chosen so as to exlude those with under 100 observations
 safe=[]
-no=83
+no=50
 
 
 
 #for loop through the observers, taking the observers with greatest number of observations
 #we appent the list.
-for value, count in occur.most_common():
+for value, count in occur.most_common(no):
     safe.append(value)
     
 print("The users stored for use are" + str(safe))
@@ -93,4 +93,5 @@ print (occur_filt)
 plt.plot(mod_jul_filt,mag_filt,'r.')
 plt.xlabel('modified julian date')
 plt.ylabel('approx vis magnitude')
+plt.ylim(6,11)
 plt.title(" AFOEV amateur data on ZUMa using top " + str(no) +  " observers' data")

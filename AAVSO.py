@@ -15,6 +15,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from collections import Counter
 from PyAstronomy.pyTiming import pyPDM
+import numpy as np
 
 # pull the date and magnitude into lists
 AAVSO1= pd.read_excel('AAVSO.xlsx', sheetname='AAVSO_filter')
@@ -76,9 +77,18 @@ mag_filt=filtered['Magnitude']
 #we check the observers' counts to ensure filter works
 occur_filt=Counter(filtered['Observer'])
 print (occur_filt)
+#want to make a way to average in groups of N to reduce the number of datapoints
+N=100
+def groupedAvg(myArray, N):
+    result = np.cumsum(myArray, 0)[N-1::N]/float(N)
+    result[1:] = result[1:] - result[:-1]
+    return result
 
 
 
+print ("this is the value of N......................"+str(N))
+mod_jul_filt_avg=groupedAvg(mod_jul_filt, N)
+mag_filt_avg=groupedAvg(mag_filt, N)
 
 """
 #plot the cleaned up data
@@ -90,13 +100,13 @@ plt.show()
 """
 # Get a ``scanner'', which defines the frequency interval to be checked.
 # Alternatively, also periods could be used instead of frequency.
-S = pyPDM.Scanner(minVal=0.5, maxVal=250.0, dVal=1, mode="frequency")
+S = pyPDM.Scanner(minVal=0.5, maxVal=500, dVal=0.1, mode="frequency")
 
 # Carry out PDM analysis. Get frequency array
 # (f, note that it is frequency, because the scanner's
 # mode is ``frequency'') and associated Theta statistic (t).
 # Use 10 phase bins and 3 covers (= phase-shifted set of bins).
-P = pyPDM.PyPDM(mod_jul_filt, mag_filt)
+P = pyPDM.PyPDM(mod_jul_filt_avg, mag_filt_avg)
 #f1, t1 = P.pdmEquiBinCover(3, 6, S)
 # For comparison, carry out PDM analysis using  bins (no covers).
 f2, t2 = P.pdmEquiBin(100, S)
@@ -106,7 +116,7 @@ f2, t2 = P.pdmEquiBin(100, S)
 
 #plot the cleaned up data
 plt.subplot(2,1,1)
-plt.plot(mod_jul_filt,mag_filt,'r.')
+plt.plot(mod_jul_filt_avg,mag_filt_avg,'r.')
 plt.xlabel('modified julian date')
 plt.ylabel('approx vis magnitude')
 plt.title("AAVSO recent data on ZUMa")

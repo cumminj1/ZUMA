@@ -110,3 +110,29 @@ will have to figure out: "ValueError: cannot set using a slice indexer with a di
 than the value". Been staring at it for too long so gonna go get some dinner.
 
 Tuesday, 18th Sept 2018
+_______________________________________________________________________________________
+_______________________________________________________________________________________
+Not much in the way of progress. Really just bashing my head against a wall trying to make a 
+breakthrough.
+
+Wednesday, 19th Sept 2018
+
+_______________________________________________________________________________________
+_______________________________________________________________________________________
+Came up with a boolean way of filtering the data POST-import from the spreadsheet. The code
+is quite rough around the edges but the principle is there, and after polisihing should work 
+a treat. Computer in astro-room wasn't working. slowed progress.
+
+Thursday, 20th Sept 2018
+_______________________________________________________________________________________
+_______________________________________________________________________________________
+Finally made a breakthrough on that. The filtering code by max and min magnitude is implemented
+so no I'm filtering data by [1] observation count [2] min/max reasonable observation. I've 
+been working on a script which imports the dates in julian day count, then converts to Gregorian,
+this is with the help of dateconvert package. I'm doing this because once I'm in Gregorian, 
+Pandas package will allow month averages etc to be taken v easily. It's working (it runs)
+but disagrees with the US Navy's online converter. Need to look at again.
+
+Friday,21st Sept 2018
+________________________________________________________________________________________
+________________________________________________________________________________________

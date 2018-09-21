@@ -3,7 +3,7 @@
 date conversion test script
 """
 import convertdate
-from convertdate import julian
+from convertdate import julianday
 from convertdate import gregorian
 
 import pandas as pd
@@ -12,8 +12,8 @@ AAVSO1= pd.read_excel('ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar201
 jul=AAVSO1['JD']
 
 
-x=julian.monthcalendar(2018,3)
-print (x)
+#x=julian.monthcalendar(2018,3)
+#print (x)
 
 #est= ju
 
@@ -21,10 +21,10 @@ print (x)
 output=[]
 #greg=julian.gregorian_from_jd(jul)
 
-for i in (jul):
-    result= julian.to_gregorian(jul1[i])
+for i in range(1,83686):
+    result= julianday.to_gregorian(jul[i])
     output.append(result)
-    i=+1
+    
 
 print (output)
 #print(greg)

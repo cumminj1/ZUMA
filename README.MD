@@ -136,3 +136,39 @@ but disagrees with the US Navy's online converter. Need to look at again.
 Friday,21st Sept 2018
 ________________________________________________________________________________________
 ________________________________________________________________________________________
+
+In work
+
+Saturday, 22nd Sept 2018
+_______________________________________________________________________________________
+_______________________________________________________________________________________
+In work
+
+Sunday, 23rd Sept 2018
+_______________________________________________________________________________________
+_______________________________________________________________________________________
+Great Success! I have the filtering with user AND the extreme values working. I'd been
+having trouble with the extreme values and I  couldn't figure out why. My issue was that
+for the Boolean < and > the magnitude column dtype was read as an object and not as float.
+Many permutations of commands later, changing the command for what the floatconverter does
+when it encounters non-numerical characters. I had been using errors='ignore', just disregarding
+the rows with non-numericals, but changing to errors='coerce' and reading non-numericals as
+'NaN's seems to have cleared everything up.
+
+Now I need to perfect the dateconversion script such that the results can be read by 
+PANDAS and allow me to do moving, windowed averages fairly easily.
+
+Monday, 24th Sept 2018
+
+
+
+
+
+
+
+
+
+
+
+
+

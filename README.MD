@@ -155,6 +155,8 @@ when it encounters non-numerical characters. I had been using errors='ignore', j
 the rows with non-numericals, but changing to errors='coerce' and reading non-numericals as
 'NaN's seems to have cleared everything up.
 
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/AAVSO_filtered.png)
+
 Now I need to perfect the dateconversion script such that the results can be read by 
 PANDAS and allow me to do moving, windowed averages fairly easily.
 

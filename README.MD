@@ -162,6 +162,16 @@ PANDAS and allow me to do moving, windowed averages fairly easily.
 
 Monday, 24th Sept 2018
 
+_________________________________________________________________________________________
+_________________________________________________________________________________________
+Had to work from home today, but git push in college wasn't successful- only the README was
+pushed??? Hopefully just forgot to add the specific files yesterday, will see in morning but
+this gives me time to do some additional reading on late type semiregulars.
+
+Tuesday, 25th Sept 2018
+
+_________________________________________________________________________________________
+_________________________________________________________________________________________
 
 
 

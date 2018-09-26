@@ -15,14 +15,26 @@ from PyAstronomy.pyTiming import pyPDM
 import numpy as np
 
 # pull the date and magnitude 
-AAVSO1= pd.read_excel('ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar2012_aavsodat', index='False')
-AAVSO1=pd.DataFrame(AAVSO1)
+#AAVSO1= pd.read_excel('ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar2012_aavsodat', index='False')
+#AAVSO1=pd.DataFrame(AAVSO1)
+
+# having used the date converter 
+# we now pull the gregorian dates
+#which can be used by PANDAS to run
+# moving averages etc
+Gregorian=pd.read_excel('ZUMa_AFOEV_AAVSO.xlsx', sheet_name='gregorian_dates', index='False')
+Greg1=pd.DataFrame(Gregorian)
+date=Greg1['Calendar Date']
+calendar=pd.to_datetime(date, errors='coerce')
+print(calendar)
 
 
+"""
 #assign the columns of interest variables
 Observer=AAVSO1['Observer']
 mod_jul=AAVSO1['JD']
 mag=AAVSO1['Magnitude']
+
 
 
 #we count how many observations each observer made
@@ -93,7 +105,7 @@ plt.xlabel('modified julian date')
 plt.ylabel('approx vis magnitude')
 plt.title(" AAVSO data on ZUMa using top " + str(no) +  " observers' data \n and extreme magnitude filtering")
 plt.show()
-
+"""
 
 
 

@@ -86,10 +86,18 @@ mag_filt=filtered2['Magnitude']
 #we check the observers' counts to ensure filter works
 '''occur_filt=Counter(filtered['Observer'])
 print (occur_filt)'''
+<<<<<<< HEAD
 
+=======
+>>>>>>> 46dd9a4b96afb2f67019e7bd78d5b7a97a9454fc
 
 #quick plot to check we're still on track
 
+<<<<<<< HEAD
+=======
+#quick plot to check we're still on track
+
+>>>>>>> 46dd9a4b96afb2f67019e7bd78d5b7a97a9454fc
 #plot the cleaned up data
 plt.plot(mod_jul_filt,mag_filt,'r.')
 plt.xlabel('modified julian date')
@@ -135,7 +143,10 @@ plt.plot(f2, t2, 'gp-')
 #plt.xticks(numpy.arange(min(f2)+0.5, max(f2)+1.5,1.0))
 plt.legend([" Bins without covers"])
 plt.show()"""
+<<<<<<< HEAD
 
+=======
+>>>>>>> 46dd9a4b96afb2f67019e7bd78d5b7a97a9454fc
 
 
 

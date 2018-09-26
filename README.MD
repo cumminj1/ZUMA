@@ -167,6 +167,14 @@ ________________________________________________________________________________
 Had to work from home today, but git push in college wasn't successful- only the README was
 pushed??? Hopefully just forgot to add the specific files yesterday, will see in morning but
 this gives me time to do some additional reading on late type semiregulars.
+<<<<<<< HEAD
+=======
+
+Tuesday, 25th Sept 2018
+
+_________________________________________________________________________________________
+_________________________________________________________________________________________
+>>>>>>> 46dd9a4b96afb2f67019e7bd78d5b7a97a9454fc
 
 Tuesday, 25th Sept 2018
 

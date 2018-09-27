@@ -13,29 +13,10 @@ import matplotlib.pyplot as plt
 from collections import Counter
 from PyAstronomy.pyTiming import pyPDM
 import numpy as np
-
-# pull the date and magnitude 
-#AAVSO1= pd.read_excel('ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar2012_aavsodat', index='False')
-#AAVSO1=pd.DataFrame(AAVSO1)
-
-# having used the date converter 
-# we now pull the gregorian dates
-#which can be used by PANDAS to run
-# moving averages etc
-Gregorian=pd.read_excel('ZUMa_AFOEV_AAVSO.xlsx', sheet_name='gregorian_dates', index='False')
-Greg1=pd.DataFrame(Gregorian)
-date=Greg1['Calendar Date']
-calendar=pd.to_datetime(date, errors='coerce')
-print(calendar)
-
-
-"""
-#assign the columns of interest variables
-Observer=AAVSO1['Observer']
-mod_jul=AAVSO1['JD']
-mag=AAVSO1['Magnitude']
-
-
+import matplotlib.dates as mdates
+# pull the data and convert it to a dataframe for pandas
+AAVSO1= pd.read_excel('/cphys/ugrad/2015-16/JF/CUMMINJ1/zuma/ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar2012_aavsodat', index='False')
+AAVSO1=pd.DataFrame(AAVSO1)
 
 #we count how many observations each observer made
 #this allows us to remove the fairweather observers
@@ -91,21 +72,74 @@ print("the float magnitude has been successfully filtered to 6<mag<9.6")
 
 #now reassign the column variables to the filtered data
 obs_filt=filtered2['Observer']
-mod_jul_filt=filtered2['JD']
+date=filtered2['Calendar Date']
 mag_filt=filtered2['Magnitude']
+calendar=pd.to_datetime(date, errors='coerce')
 
+#confirm that our data are all the correct and same length
+#as one another
+print("the length of observers: " + str(len(obs_filt)))
+print("the length of magnitude: "+ str(len(mag_filt)))
+print("the length of date: "+ str(len(date)))
+print("the length of converted date: "+ str(len(calendar)))
+
+#now let's move on to the movin averages and statisitics 
+group=filtered2.groupby(["Year","Month"])
+print("Grouping has been successful")
+
+monthly_averages=group.aggregate({'Magnitude':np.mean})
+
+print("the monthly averages are" + str(monthly_averages))
+
+plot1=filtered2.groupby(["Year","Month"])['Magnitude'].mean()
+#plot2=plot1.unstack('Month').loc[:, 'Magnitude']
+#plot2.index=pd.PeriodIndex()
+fig,ax1=plt.subplots()
+
+plot1.plot()
+
+
+ax1.xaxis.set_major_locator(mdates.YearLocator(2))
+ax1.xaxis.set_minor_locator(mdates.MonthLocator(interval=3))
+
+plt.xticks(rotation=45)
+plt.ylabel("Apparent Visual Magnitude")
+plt.show()
+
+
+
+
+
+
+#plt.plot(monthly_averages.Magnitude)
+#plt.show()
+"""
+#create the basis of the plot
+fig,ax1=plt.subplots()
+plt.plot(calendar, mag_filt, 'g.')
+
+#add the title
+plt.title("TEST3: AAVSO measurements of ZUMa Magnitude")
+plt.ylabel("Apparent Visual Magnitude")
+#add the date based locations
+print("title check")
+ax1.xaxis.set_major_locator(mdates.YearLocator(2))
+ax1.xaxis.set_minor_locator(mdates.MonthLocator(interval=3))
+print("Major Locator Check")
+
+plt.xticks(rotation=45)
+print("Tick Rotation check")
+plt.grid(True)
+plt.show()
 
 #we check the observers' counts to ensure filter works
 '''occur_filt=Counter(filtered['Observer'])
 print (occur_filt)'''
-
-#plot the cleaned up data
-plt.plot(mod_jul_filt,mag_filt,'r.')
-plt.xlabel('modified julian date')
-plt.ylabel('approx vis magnitude')
-plt.title(" AAVSO data on ZUMa using top " + str(no) +  " observers' data \n and extreme magnitude filtering")
-plt.show()
 """
+
+
+
+
 
 
 
@@ -143,7 +177,8 @@ plt.ylabel("Theta")
 plt.plot(f2, t2, 'gp-')
 #plt.xticks(numpy.arange(min(f2)+0.5, max(f2)+1.5,1.0))
 plt.legend([" Bins without covers"])
-plt.show()"""
+plt.show()
+"""
 
 
 

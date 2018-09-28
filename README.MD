@@ -167,18 +167,37 @@ ________________________________________________________________________________
 Had to work from home today, but git push in college wasn't successful- only the README was
 pushed??? Hopefully just forgot to add the specific files yesterday, will see in morning but
 this gives me time to do some additional reading on late type semiregulars.
-<<<<<<< HEAD
-=======
+
 
 Tuesday, 25th Sept 2018
 
 _________________________________________________________________________________________
 _________________________________________________________________________________________
->>>>>>> 46dd9a4b96afb2f67019e7bd78d5b7a97a9454fc
+Worked on tidying up considerable and getting the conversion script to output to an excel 
+sheet within the workbook. They can now be added and read by the data script which allows 
+the calendar to be filtered alongside the magnitude and so on. Now need to get the finger
+out and figure out the rolling averages
 
-Tuesday, 25th Sept 2018
+Wednesday, 26th Sept 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+After a lot of trials I have managed to be able to plot 1 month averages, however the xaxis
+ticks aren't there since I've been using two parameters in the pandas.groupby command. hopefully
+this will be a relatively easy fix, and then I'll move on to shortening the window to perhaps only 
+10 days
 
-_________________________________________________________________________________________
-_________________________________________________________________________________________
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/yearlyavg.png)
 
+Above is the groupby function from pandas implemented with a mean, on a yearly basis.
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/monthlyavg.png)
+
+And here we have a monthly average for the data, although it does look messy, given
+just how many years are condensed into a relatively short graph. Once everything is up and
+running, then I'll work on graphing only within 5-10 year timeseries but with multiple subplots
+
+Thursday, 27th Sept 2018
+
+__________________________________________________________________________________________
+__________________________________________________________________________________________
 

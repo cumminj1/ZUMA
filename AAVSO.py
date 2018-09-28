@@ -33,7 +33,7 @@ print(" ")
 #We create an empty list of approved users and "no" sets out how far down the list of most prolific we go
 #here 147 is chosen so as to exlude those with under 100 observations
 safe=[]
-no=50
+no=5
 
 #for loop through the observers, taking the observers with greatest number of observations
 #we appent the list.
@@ -91,28 +91,35 @@ monthly_averages=group.aggregate({'Magnitude':np.mean})
 
 print("the monthly averages are" + str(monthly_averages))
 
-plot1=filtered2.groupby(["Year","Month"])['Magnitude'].mean()
-#plot2=plot1.unstack('Month').loc[:, 'Magnitude']
-#plot2.index=pd.PeriodIndex()
-fig,ax1=plt.subplots()
-
-plot1.plot()
-
-
-ax1.xaxis.set_major_locator(mdates.YearLocator(2))
-ax1.xaxis.set_minor_locator(mdates.MonthLocator(interval=3))
-
-plt.xticks(rotation=45)
-plt.ylabel("Apparent Visual Magnitude")
-plt.show()
 
 
 
+#plot1=filtered2.groupby(["Year","Month"])['Magnitude'].mean().plot(ax=ax)
 
 
+"""plot1=filtered2.groupby(["Year","Month"]).mean()['Magnitude']
+fig,ax=plt.subplots()
+ax.set_xlabel('Time')
+ax.set_ylabel('Apparent Visual Magnitude')
+ax.set_xticks(range(len(plot1)))
+ax.set_xticklabels(["%s-%01d" % item for item in plot1.index.tolist()], rotation=0)
+plot1.plot(ax=ax)"""
 
-#plt.plot(monthly_averages.Magnitude)
-#plt.show()
+
+#let's try and refine the search a bit, lets try 7
+#day means
+filtered3=filtered2.set_index(calendar)
+filtered4=pd.DataFrame(filtered3.Magnitude)
+print(filtered4.index)
+daymean=filtered4.rolling(15,min_periods=10).mean()
+print(daymean)
+
+fig,ax=plt.subplots()
+
+ax1=daymean.plot(style='.', title="15 day averages of ZUMa")
+ax1.set_ylabel('Apparent Visual Magnitude')
+#ax.set_title("7 day mean values for ZUMa")
+
 """
 #create the basis of the plot
 fig,ax1=plt.subplots()

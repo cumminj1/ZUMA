@@ -200,4 +200,20 @@ Thursday, 27th Sept 2018
 
 __________________________________________________________________________________________
 __________________________________________________________________________________________
+Found that in an update, pandas ".rolling().mean()" is now able to handle datetime data with
+time gaps. I have been working with a rolling 15-day average, with datapoints assigned only 
+where there are entries at least 10 times within that 15 day period. This is good news. Although
+the data is still fairly noisy at full timescale, when one /ZUMa/s (haha) in to a decade worth of 
+data, we can clearly see the primary curve. In order to improve this, I plan to remove users whose
+contribution to a bin is not within N standard deviations of the mean.
 
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/15dayfull.png)
+dataset in full with 15 day averaging
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/15dayzoom.png)
+dataset zoomed to a ten year period or so
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/40squiet.png)
+confirmation that the late 40s were quiet for ZUMa
+
+Friday, 28h Sept 2018

@@ -217,3 +217,27 @@ dataset zoomed to a ten year period or so
 confirmation that the late 40s were quiet for ZUMa
 
 Friday, 28h Sept 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+Work
+
+Saturday, 29th Sept 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+Work
+
+Sunday, 30th Sept 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+Figured out why there were so many artefacts in the data; I was passing the window size as 
+an integer number of days when it should have been specified as a string. Following that,
+duplicates appeared but were removed by taking all duplicates out of the dataframe (currently
+just using the last entry, but would rather use a mean). Have taken fixed window, non-moving
+averages for comparison and they are subplots alongside the smoother moving averages. Still seem
+to be some bumps over small timescales, which isn't really whats expected for a star this size.
+
+Monday, 1st Oct 2018
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/comparing_avgs.png)
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/comparing_avgs_zoom.png)

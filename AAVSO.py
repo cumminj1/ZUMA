@@ -15,8 +15,10 @@ from PyAstronomy.pyTiming import pyPDM
 import numpy as np
 import matplotlib.dates as mdates
 # pull the data and convert it to a dataframe for pandas
-AAVSO1= pd.read_excel('/cphys/ugrad/2015-16/JF/CUMMINJ1/zuma/ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar2012_aavsodat', index='False')
-AAVSO1=pd.DataFrame(AAVSO1)
+#AAVSO1= pd.read_excel('/cphys/ugrad/2015-16/JF/CUMMINJ1/zuma/ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar2012_aavsodat', index='False')
+#AAVSO1=pd.DataFrame(AAVSO1)
+#AAVSO1.to_pickle("AAVSO12")
+AAVSO1=pd.read_pickle("AAVSO12")
 
 #we count how many observations each observer made
 #this allows us to remove the fairweather observers
@@ -108,16 +110,44 @@ plot1.plot(ax=ax)"""
 
 #let's try and refine the search a bit, lets try 7
 #day means
+
+#here Im setting the index to be a datetime format
 filtered3=filtered2.set_index(calendar)
+#refining search to just magnitude
 filtered4=pd.DataFrame(filtered3.Magnitude)
+#confirming the index is properly datetime
 print(filtered4.index)
-daymean=filtered4.rolling(15,min_periods=10).mean()
+
+#before rolling mean, the timeindex must be sorted
+filtered4=filtered4.sort_index()
+
+#we set ndays to be the number of days we want our averages to cover
+ndays="10d"
+ndaysfix=10
+#here we apply .rolling and .mean to get a rolling mean the first kwarg can be an integer or timeperiod
+#we use the timeperiod so the data is gropued by timeperiod rather than the number of entries
+daymean=filtered4.rolling(ndays,min_periods=1 ).mean()
+
+daymean=daymean[~daymean.index.duplicated(keep='first')]
 print(daymean)
+fixedtest=filtered4.resample("10D").mean()
+fig,axes=plt.subplots(nrows=2,ncols=1)
+fixedtest.plot(ax=axes[0],style='.', title="%i day fixed averages of ZUMa" %ndaysfix)
+plt.ylabel('Apparent Visual Magnitude')
+plt.grid(True)
+plt.ylim(max(fixedtest), min(fixedtest))
+plt.show()
 
-fig,ax=plt.subplots()
+daymean.plot(ax=axes[1],style='.', title="%s moving averages of ZUMa" %ndays)
+plt.ylabel('Apparent Visual Magnitude')
+plt.ylim(max(daymean.Magnitude), min(daymean.Magnitude))
+plt.grid(True)
+plt.tight_layout()
+plt.show()
 
-ax1=daymean.plot(style='.', title="15 day averages of ZUMa")
-ax1.set_ylabel('Apparent Visual Magnitude')
+#ax1.set_ylabel('Apparent Visual Magnitude')
+#ax1.set_ylim(ax1.get_ylim()[::-1])
+#ax1.grid(True)
 #ax.set_title("7 day mean values for ZUMa")
 
 """
@@ -152,40 +182,6 @@ print (occur_filt)'''
 
 
 
-#PDM analysis can stay away for the time being
-"""
-# Get a ``scanner'', which defines the frequency interval to be checked.
-# Alternatively, also periods could be used instead of frequency.
-S = pyPDM.Scanner(minVal=0.5, maxVal=500, dVal=1, mode="frequency")
-
-# Carry out PDM analysis. Get frequency array
-# (f, note that it is frequency, because the scanner's
-# mode is ``frequency'') and associated Theta statistic (t).
-# Use 10 phase bins and 3 covers (= phase-shifted set of bins).
-P = pyPDM.PyPDM(mod_jul_filt, mag_filt)
-#f1, t1 = P.pdmEquiBinCover(3, 6, S)
-# For comparison, carry out PDM analysis using  bins (no covers).
-f2, t2 = P.pdmEquiBin(10, S)
-
-
-
-#plot the cleaned up data
-plt.subplot(2,1,1)
-plt.plot(mod_jul_filt,mag_filt,'r.')
-plt.xlabel('modified julian date')
-plt.ylabel('approx vis magnitude')
-plt.title("AAVSO recent data on ZUMa")
-
-plt.subplot(2,1,2)
-plt.title("Result of PDM analysis ")
-plt.xlabel("Frequency")
-plt.ylabel("Theta")
-#plt.plot(f1, t1, 'bp-')
-plt.plot(f2, t2, 'gp-')
-#plt.xticks(numpy.arange(min(f2)+0.5, max(f2)+1.5,1.0))
-plt.legend([" Bins without covers"])
-plt.show()
-"""
 
 
 

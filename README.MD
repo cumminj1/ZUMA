@@ -236,8 +236,22 @@ just using the last entry, but would rather use a mean). Have taken fixed window
 averages for comparison and they are subplots alongside the smoother moving averages. Still seem
 to be some bumps over small timescales, which isn't really whats expected for a star this size.
 
-Monday, 1st Oct 2018
+
 
 ![alt text](https://github.com/cumminj1/ZUMA/blob/master/comparing_avgs.png)
 
 ![alt text](https://github.com/cumminj1/ZUMA/blob/master/comparing_avgs_zoom.png)
+
+Monday, 1st Oct 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+Spent the day workin on PDM to take a break from data cleaning. Seems to be much improved when
+working on simulated datasets I've generated. There are troughs representing mis-identified peaks
+which, after rechecking the original 1978 Stellingwerf paper, is to be expected. He writes that 
+for large datasets, you're likely to get aliasing from sidelobes and noise etc. The statistical effects
+are not as important for the larger datasets, though they are paramount for the smaller datasets. the maths 
+and stats can be found in the Stellingwerf paper for reference.
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/PDM_.png)
+
+Tuesday, 2nd Oct 2018

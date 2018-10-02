@@ -11,51 +11,67 @@ import numpy
 import matplotlib.pylab as plt
 from PyAstronomy.pyTiming import pyPDM
 
-# Create artificial data with frequency = 3,
-# period = 1/3
-period_1=(99)
-frequency_1=(3)
+# Create artificial data
+period_1=(25)
+frequency_1=(1/period_1)
 
-period_2=(120)
-frequency_2=(11)
+period_2=(10)
+frequency_2=(1/period_2)
 
-period_3=(240)
-frequency_3=(29)
+period_3=(5)
+frequency_3=(1/period_3)
 
-x = numpy.arange(100) / 100.0
+#convolute the three sinusoidals
+x = numpy.arange(10000) / 10
 y = numpy.sin(x*2.0*numpy.pi*frequency_1 + 1.7)+numpy.sin(x*frequency_2*2.0*numpy.pi+1.7)++numpy.cos(x*frequency_3*2.0*numpy.pi+1.7)
 
-noise=numpy.random.normal(0,1,x.shape)
+#adding the noise
+# we use a normal distibution with a std deviation of 1.0, centered at 0
+stddevs=1.0
+#shape our noise to the signal's dimensions
+noise=numpy.random.normal(0,stddevs,x.shape)
+#add to the signal
 y1=y+noise
 
 
 # Get a ``scanner'', which defines the frequency interval to be checked.
 # Alternatively, also periods could be used instead of frequency.
-S = pyPDM.Scanner(minVal=0.05, maxVal=260, dVal=0.01, mode="frequency")
+S = pyPDM.Scanner(minVal=0.05, maxVal=35, dVal=0.01, mode="period")
 
 # Carry out PDM analysis. Get frequency array
 # (f, note that it is frequency, because the scanner's
 # mode is ``frequency'') and associated Theta statistic (t).
-# Use 10 phase bins and 3 covers (= phase-shifted set of bins).
 P = pyPDM.PyPDM(x, y1)
-f1, t1 = P.pdmEquiBinCover(10, 6, S)
-# For comparison, carry out PDM analysis using  bins (no covers).
-f2, t2 = P.pdmEquiBin(10, S)
+#PDM analysis using  bins (no covers).
+f2, t2 = P.pdmEquiBin(5, S)
+#local minima empty list to be appended
+minima=[]
+#printing the local minima:
+#what I've done is take the values where the three points either side of it
+#are larger than it, then filtered such that to be accepted it must be withing
+#20% of the global minimum
+for i in range (len(t2)-3):
+    if t2[i] < t2[i+1] and t2[i] < t2[i-1]and t2[i] < t2[i-2]and t2[i] < t2[i-3]  and t2[i] < t2[i+2] and t2[i] < t2[i+3] and t2[i] < (min (t2) + (min(t2)*(2/10))):
+        then: minima.append(f2[i])
+minima= [ '%.2f' % elem for elem in minima ]
+print (minima)
+
+#props will set up the conditions we like for the textbox in the graphs
+props = dict(boxstyle='round', facecolor='wheat', alpha=0.9)
 
 
-# Show the result
-#plt.figure(facecolor='white')
+#create each subplot for the input and output:
+#input
 plt.subplot(2,1,1)
 plt.title('convoluted sinusoidals')
-plt.scatter(x,y1)
-plt.text(0.5,0.8,'input period 1=' +str(period_1)+ "\n "+" input period 2=" +str(period_2)+"\n "+" input period 3=" +str(period_3),fontsize=7)
-
+plt.scatter(x,y1, s=2)
+plt.text(1,1,'input period 1 =' +str(period_1)+ "[days] \n "+" input period 2=" +str(period_2)+'[days]'+"\n "+" input period 3=" +str(period_3)+'[days]' + "\n Noise= normal dist with std of "+ str(stddevs),fontsize=7, bbox=props)
+#output
 plt.subplot(2,1,2)
 plt.title("Result of PDM analysis ")
 plt.xlabel("freq")
 plt.ylabel("Theta")
-#plt.plot(f1, t1, 'bp-')
+plt.text(0.85,0.85,'output periods are: ' + str(minima)+'[days]',fontsize=7, bbox=props)
 plt.plot(f2, t2, 'gp-')
-plt.xticks(numpy.arange(min(f2)+0.5, max(f2)+0.5,1.0))
 plt.legend([" Bins without covers"])
 plt.show()

@@ -22,8 +22,8 @@ period_3=(5)
 frequency_3=(1/period_3)
 
 #convolute the three sinusoidals
-x = numpy.arange(10000) / 10
-y = numpy.sin(x*2.0*numpy.pi*frequency_1 + 1.7)+numpy.sin(x*frequency_2*2.0*numpy.pi+1.7)++numpy.cos(x*frequency_3*2.0*numpy.pi+1.7)
+x = numpy.arange(10000) / 40
+y = numpy.sin(x*2.0*numpy.pi*frequency_1 + 0)+numpy.sin(x*frequency_2*2.0*numpy.pi+1.7)++numpy.cos(x*frequency_3*2.0*numpy.pi+1.7)
 
 #adding the noise
 # we use a normal distibution with a std deviation of 1.0, centered at 0
@@ -40,21 +40,30 @@ S = pyPDM.Scanner(minVal=0.05, maxVal=35, dVal=0.01, mode="period")
 
 # Carry out PDM analysis. Get frequency array
 # (f, note that it is frequency, because the scanner's
-# mode is ``frequency'') and associated Theta statistic (t).
+# mode is ``period'') and associated Theta statistic (t).
 P = pyPDM.PyPDM(x, y1)
+
+f1, t1 = P.pdmEquiBinCover(10, 3, S)
 #PDM analysis using  bins (no covers).
 f2, t2 = P.pdmEquiBin(5, S)
 #local minima empty list to be appended
 minima=[]
+theta=[]
 #printing the local minima:
 #what I've done is take the values where the three points either side of it
 #are larger than it, then filtered such that to be accepted it must be withing
 #20% of the global minimum
 for i in range (len(t2)-3):
     if t2[i] < t2[i+1] and t2[i] < t2[i-1]and t2[i] < t2[i-2]and t2[i] < t2[i-3]  and t2[i] < t2[i+2] and t2[i] < t2[i+3] and t2[i] < (min (t2) + (min(t2)*(2/10))):
-        then: minima.append(f2[i])
+        then: minima.append(f2[i]) 
+        theta.append(t2[i])
 minima= [ '%.2f' % elem for elem in minima ]
+
+theta=numpy.asarray(theta)
+fvalue=1./theta
+
 print (minima)
+print (fvalue)
 
 #props will set up the conditions we like for the textbox in the graphs
 props = dict(boxstyle='round', facecolor='wheat', alpha=0.9)
@@ -73,5 +82,6 @@ plt.xlabel("freq")
 plt.ylabel("Theta")
 plt.text(0.85,0.85,'output periods are: ' + str(minima)+'[days]',fontsize=7, bbox=props)
 plt.plot(f2, t2, 'gp-')
-plt.legend([" Bins without covers"])
+plt.plot(f1,t1, 'rp-')
+plt.legend([" Bins without covers","Bins with covers"])
 plt.show()

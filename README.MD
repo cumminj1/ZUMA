@@ -255,3 +255,24 @@ and stats can be found in the Stellingwerf paper for reference.
 ![alt text](https://github.com/cumminj1/ZUMA/blob/master/PDM_.png)
 
 Tuesday, 2nd Oct 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+Playing with the PDM code, and with the number of false periods returned from simulated data,
+I realised that I had neglected to filter the results based upon their statistical significane.
+As such I spent most of the day deciphering the relevant quantities from the Stellingwerf PDM
+paper.
+
+
+Wednesday, 3rd Oct 2018
+
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+Continuing from yesterday,using the Theta values for variance ratios 
+to get F-value, and hence p-values, by rejecting periods with p < 0.05 the false peaks have effectively been removed, although for very large binsthere is aliasing (sidelobes?). It seems better
+to keep the bin sizes larger than the estimated fundamental freq, but not by much. Even with the
+more stringent statistical tests, harmonics are sometimes identified as periods. Need to work on this.
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/statistical_filtering.png)
+Thursday, 4th Oct 2018
+
+__________________________________________________________________________________________
+__________________________________________________________________________________________

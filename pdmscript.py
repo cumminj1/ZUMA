@@ -14,8 +14,17 @@ import scipy.stats
 import pandas as pd
 #read the real data
 mv_data=pd.read_pickle("AAVSO_processed_moving")
-fx_data=pd.read_pickle("AAVSO_processed_ moving")
 
+fx_data=pd.read_pickle("AAVSO_processed_fixed")
+lowerdate='1975-01-05'
+upperdate='1978-12-25'
+fx_period_slice=fx_data[lowerdate:upperdate]
+fxps=fx_period_slice.reset_index()
+fxps0=fxps.index.values
+fxps1=fxps.Magnitude.values
+print(fxps0, fxps1)
+#the day averages
+NO=10
 #going to have to change the datetime index to a daycount index if i want halfway decent results
 
 
@@ -50,15 +59,17 @@ y1=y+noise
 
 #here since we have a lot of data, BinUp is the number of points per bin.
 #has strong effect on the pvalue, needs to be big enough to contain fundamental
-BinUp=200
-S = pyPDM.Scanner(minVal=0.05, maxVal=BinUp, dVal=0.01, mode="period")
+BinUp=35.5
+S = pyPDM.Scanner(minVal=0.05, maxVal=BinUp, dVal=0.1, mode="period")
 
 # Carry out PDM analysis. Get frequency array
 # (f, note that it is frequency, because the scanner's
 # mode is ``period'') and associated Theta statistic (t).
-P = pyPDM.PyPDM(x, y1)
 
-f1, t1 = P.pdmEquiBinCover(10, 3, S)
+#here is where we feed te data
+P = pyPDM.PyPDM(fxps0, fxps1)
+
+f1, t1 = P.pdmEquiBinCover(20, 3, S)
 #PDM analysis using  bins (no covers).
 M=5
 
@@ -74,14 +85,18 @@ theta=[]
 
 for i in range (len(t2)-3):
     if t2[i] < t2[i+1] and t2[i] < t2[i-1]and t2[i] < t2[i-2]and t2[i] < t2[i-3]  and t2[i] < t2[i+2] and t2[i] < t2[i+3] and t2[i]  :
-        then: minima.append(f2[i]) 
+        #then: minima.append(f2[i]) 
+        #if using 10d means
+        then: minima.append(f2[i]*NO) 
         theta.append(t2[i])
 minima= [ '%.2f' % elem for elem in minima ]
 
 theta=numpy.asarray(theta)
 fvalue=1./theta
-p_value = scipy.stats.f.cdf(fvalue, len(x)-1,BinUp-M)
+p_value = scipy.stats.f.cdf(fvalue, len(fxps0)-1,BinUp-M)
 p_value = 1-p_value
+
+
 #print("The identified peaks are at (days): "+str(minima))
 #print ("The F-Values for each of the above periods are: "+str(fvalue))
 #print("The corresponding p-values are: "+str(p_value))
@@ -108,16 +123,27 @@ props = dict(boxstyle='round', facecolor='wheat', alpha=0.9)
 #create each subplot for the input and output:
 #input
 plt.subplot(2,1,1)
-plt.title('convoluted sinusoidals')
-plt.scatter(x,y1, s=2)
+plt.title('Z-UMa data for:' + lowerdate + " to "+upperdate)
+plt.scatter(fxps0*10,fxps1, s=2)
+plt.ylabel('Magnitude')
+plt.xlabel('Days')
 plt.text(1,1,'input period 1 =' +str(period_1)+ "[days] \n "+" input period 2=" +str(period_2)+'[days]'+"\n "+" input period 3=" +str(period_3)+'[days]' + "\n Noise= normal dist with std of "+ str(stddevs),fontsize=7, bbox=props)
+plt.tight_layout()
+plt.grid(True)
 #output
 plt.subplot(2,1,2)
 plt.title("Result of PDM analysis ")
-plt.xlabel("freq")
+plt.xlabel("Period[days]")
 plt.ylabel("Theta")
-plt.text(0.85,0.85,'output periods are: ' + str(minima)+'[days]',fontsize=7, bbox=props)
-plt.plot(f2, t2, 'gp-')
-plt.plot(f1,t1, 'rp-')
+plt.text(0.85,0.85,'output periods are: \n' + str(stat_significant['Id Period'])+'',fontsize=7, bbox=props)
+plt.grid(True)
+#if using 10 day  etc
+plt.plot(f2*NO, t2, 'gp-')
+#plt.plot(f1*NO,t1, 'rp-')
+#if using daycount
+#plt.plot(f2, t2, 'gp-')
+#plt.plot(f1,t1, 'rp-')
 plt.legend([" Bins without covers","Bins with covers"])
+plt.tight_layout()
+
 plt.show()

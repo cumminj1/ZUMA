@@ -127,52 +127,32 @@ ndaysfix=10
 #here we apply .rolling and .mean to get a rolling mean the first kwarg can be an integer or timeperiod
 #we use the timeperiod so the data is gropued by timeperiod rather than the number of entries
 daymean=filtered4.rolling(ndays,min_periods=1 ).mean()
-
 daymean=daymean[~daymean.index.duplicated(keep='first')]
+daymean.to_pickle("AAVSO_processed_moving")
 print(daymean)
+
+#fixed test is the data with fixed 10d averages
 fixedtest=filtered4.resample("10D").mean()
-fig,axes=plt.subplots(nrows=2,ncols=1)
-fixedtest.plot(ax=axes[0],style='.', title="%i day fixed averages of ZUMa" %ndaysfix)
-plt.ylabel('Apparent Visual Magnitude')
-plt.grid(True)
-plt.ylim(max(fixedtest), min(fixedtest))
-plt.show()
+fixedtest.to_pickle("AAVSO_processed_fixed")
+#plt.figure()
+fig,(ax1, ax2)=plt.subplots(nrows=2,ncols=1)
 
-daymean.plot(ax=axes[1],style='.', title="%s moving averages of ZUMa" %ndays)
-plt.ylabel('Apparent Visual Magnitude')
-plt.ylim(max(daymean.Magnitude), min(daymean.Magnitude))
-plt.grid(True)
+#plot the fixed averages
+fixedtest.plot(ax=ax1,style='.', title="%i day fixed averages of ZUMa" %ndaysfix)
+ax1.set_ylabel('Apparent Visual Magnitude')
+ax1.set_ylim(max(fixedtest.Magnitude), min(fixedtest.Magnitude))
+ax1.grid(True)
 plt.tight_layout()
-plt.show()
 
-#ax1.set_ylabel('Apparent Visual Magnitude')
-#ax1.set_ylim(ax1.get_ylim()[::-1])
-#ax1.grid(True)
-#ax.set_title("7 day mean values for ZUMa")
+#plot the moving averages
+daymean.plot(ax=ax2,style='.', title="%s moving averages of ZUMa" %ndays)
+ax2.set_ylabel('Apparent Visual Magnitude')
+ax2.set_ylim(max(daymean.Magnitude), min(daymean.Magnitude))
+ax2.grid(True)
+plt.tight_layout()
 
-"""
-#create the basis of the plot
-fig,ax1=plt.subplots()
-plt.plot(calendar, mag_filt, 'g.')
 
-#add the title
-plt.title("TEST3: AAVSO measurements of ZUMa Magnitude")
-plt.ylabel("Apparent Visual Magnitude")
-#add the date based locations
-print("title check")
-ax1.xaxis.set_major_locator(mdates.YearLocator(2))
-ax1.xaxis.set_minor_locator(mdates.MonthLocator(interval=3))
-print("Major Locator Check")
 
-plt.xticks(rotation=45)
-print("Tick Rotation check")
-plt.grid(True)
-plt.show()
-
-#we check the observers' counts to ensure filter works
-'''occur_filt=Counter(filtered['Observer'])
-print (occur_filt)'''
-"""
 
 
 

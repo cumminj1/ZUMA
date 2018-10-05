@@ -12,6 +12,14 @@ import matplotlib.pylab as plt
 from PyAstronomy.pyTiming import pyPDM
 import scipy.stats
 import pandas as pd
+#read the real data
+mv_data=pd.read_pickle("AAVSO_processed_moving")
+fx_data=pd.read_pickle("AAVSO_processed_ moving")
+
+#going to have to change the datetime index to a daycount index if i want halfway decent results
+
+
+
 
 # Create artificial data
 period_1=(99)

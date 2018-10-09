@@ -15,10 +15,17 @@ from PyAstronomy.pyTiming import pyPDM
 import numpy as np
 import matplotlib.dates as mdates
 # pull the data and convert it to a dataframe for pandas
-#AAVSO1= pd.read_excel('/cphys/ugrad/2015-16/JF/CUMMINJ1/zuma/ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar2012_aavsodat', index='False')
-#AAVSO1=pd.DataFrame(AAVSO1)
-#AAVSO1.to_pickle("AAVSO12")
+AAVSO1= pd.read_excel('/cphys/ugrad/2015-16/JF/CUMMINJ1/zuma/ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar2012_aavsodat', index='False')
+AAVSO1=pd.DataFrame(AAVSO1)
+AAVSO1.to_pickle("AAVSO12")
 AAVSO1=pd.read_pickle("AAVSO12")
+
+
+#we set ndays to be the number of days we want our averages to cover
+ndays="7d"
+ndaysfix=7
+
+
 
 #we count how many observations each observer made
 #this allows us to remove the fairweather observers
@@ -121,9 +128,7 @@ print(filtered4.index)
 #before rolling mean, the timeindex must be sorted
 filtered4=filtered4.sort_index()
 
-#we set ndays to be the number of days we want our averages to cover
-ndays="10d"
-ndaysfix=10
+
 #here we apply .rolling and .mean to get a rolling mean the first kwarg can be an integer or timeperiod
 #we use the timeperiod so the data is gropued by timeperiod rather than the number of entries
 daymean=filtered4.rolling(ndays,min_periods=1 ).mean()
@@ -132,7 +137,7 @@ daymean.to_pickle("AAVSO_processed_moving")
 print(daymean)
 
 #fixed test is the data with fixed 10d averages
-fixedtest=filtered4.resample("10D").mean()
+fixedtest=filtered4.resample(ndays).mean()
 fixedtest.to_pickle("AAVSO_processed_fixed")
 #plt.figure()
 fig,(ax1, ax2)=plt.subplots(nrows=2,ncols=1)

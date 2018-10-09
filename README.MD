@@ -276,3 +276,50 @@ Thursday, 4th Oct 2018
 
 __________________________________________________________________________________________
 __________________________________________________________________________________________
+Continued same as yesterday, found that the fixed averaging is an awful lot easier to work with
+as the timestamps are with a continuous number of days (no gaps)
+
+Friday, 5th Oct 2018
+
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+In Work
+
+Saturday, 6th Oct 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+In Work
+
+Sunday, 7th Oct 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+Finished reading some papers on similar topics and radial vs non-radial pulsations seem 
+to be relevant, as do the spectral type of the star when any real changes come about. The
+C-rich, and O-rich variants seem to have different characteristic pulsation
+
+Monday, 8th Oct 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+I'm trying to figure out a way to have my pdm script read through my moving averages data,
+but the issue is that this data has timegaps, and the PYPDM package reads discrete days, 
+not really understanding the gaps. Trying to either interpolate or just fill the gaps in 
+the Datetime index with NaNs, but worried that they might affect the PDM results
+
+Tuesday, 9th Oct 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+

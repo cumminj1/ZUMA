@@ -13,19 +13,34 @@ from PyAstronomy.pyTiming import pyPDM
 import scipy.stats
 import pandas as pd
 #read the real data
-mv_data=pd.read_pickle("AAVSO_processed_moving")
+"""mv_data=pd.read_pickle("AAVSO_processed_moving")
+print(mv_data)
+mv_data=mv_data.interpolate(method='linear')
+print(mv_data)
+lowerdate='1934-01-08'
+upperdate='1945-01-02'
+mv_period_slice=mv_data[lowerdate:upperdate]
+mvps=mv_period_slice.reset_index()
+mvps0=mvps.index.values
+mvps1=mvps.Magnitude.values
+print(mvps0, mvps1)"""
 
+#fixed data
 fx_data=pd.read_pickle("AAVSO_processed_fixed")
-lowerdate='1975-01-05'
-upperdate='1978-12-25'
+lowerdate=fx_data.index.searchsorted(pd.datetime(1930,1,1))
+upperdate=fx_data.index.searchsorted(pd.datetime(2012,1,1))
 fx_period_slice=fx_data[lowerdate:upperdate]
-fxps=fx_period_slice.reset_index()
+fxps=fx_period_slice.reset_index().dropna()
 fxps0=fxps.index.values
 fxps1=fxps.Magnitude.values
 print(fxps0, fxps1)
 #the day averages
-NO=10
+NO=7
+#here since we have a lot of data, BinUp is the number of points per bin.
+#has strong effect on the pvalue, needs to be big enough to contain fundamental
+BinUp=10000
 #going to have to change the datetime index to a daycount index if i want halfway decent results
+
 
 
 
@@ -56,10 +71,6 @@ y1=y+noise
 
 # Get a ``scanner'', which defines the frequency interval to be checked.
 # Alternatively, also periods could be used instead of frequency.
-
-#here since we have a lot of data, BinUp is the number of points per bin.
-#has strong effect on the pvalue, needs to be big enough to contain fundamental
-BinUp=35.5
 S = pyPDM.Scanner(minVal=0.05, maxVal=BinUp, dVal=0.1, mode="period")
 
 # Carry out PDM analysis. Get frequency array
@@ -67,7 +78,8 @@ S = pyPDM.Scanner(minVal=0.05, maxVal=BinUp, dVal=0.1, mode="period")
 # mode is ``period'') and associated Theta statistic (t).
 
 #here is where we feed te data
-P = pyPDM.PyPDM(fxps0, fxps1)
+P = pyPDM.PyPDM(fxps0, fxps1)   #fixed data
+#P = pyPDM.PyPDM(mvps0,mvps1)    #moving data
 
 f1, t1 = P.pdmEquiBinCover(20, 3, S)
 #PDM analysis using  bins (no covers).
@@ -123,8 +135,8 @@ props = dict(boxstyle='round', facecolor='wheat', alpha=0.9)
 #create each subplot for the input and output:
 #input
 plt.subplot(2,1,1)
-plt.title('Z-UMa data for:' + lowerdate + " to "+upperdate)
-plt.scatter(fxps0*10,fxps1, s=2)
+plt.title('Z-UMa data for:' + str(lowerdate) + " to "+ str(upperdate))
+plt.scatter(fxps0*NO,fxps1, s=2)
 plt.ylabel('Magnitude')
 plt.xlabel('Days')
 plt.text(1,1,'input period 1 =' +str(period_1)+ "[days] \n "+" input period 2=" +str(period_2)+'[days]'+"\n "+" input period 3=" +str(period_3)+'[days]' + "\n Noise= normal dist with std of "+ str(stddevs),fontsize=7, bbox=props)
@@ -139,7 +151,7 @@ plt.text(0.85,0.85,'output periods are: \n' + str(stat_significant['Id Period'])
 plt.grid(True)
 #if using 10 day  etc
 plt.plot(f2*NO, t2, 'gp-')
-#plt.plot(f1*NO,t1, 'rp-')
+plt.plot(f1*NO,t1, 'rp-')
 #if using daycount
 #plt.plot(f2, t2, 'gp-')
 #plt.plot(f1,t1, 'rp-')

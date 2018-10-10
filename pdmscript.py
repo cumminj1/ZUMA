@@ -27,10 +27,13 @@ print(mvps0, mvps1)"""
 
 #fixed data
 fx_data=pd.read_pickle("AAVSO_processed_fixed")
-lowerdate=fx_data.index.searchsorted(pd.datetime(1930,1,1))
-upperdate=fx_data.index.searchsorted(pd.datetime(2012,1,1))
+loweryear=2012
+upperyear=2018
+lowerdate=fx_data.index.searchsorted(pd.datetime(loweryear,1,1))
+upperdate=fx_data.index.searchsorted(pd.datetime(upperyear,1,1))
 fx_period_slice=fx_data[lowerdate:upperdate]
-fxps=fx_period_slice.reset_index().dropna()
+fx_period_slice=fx_period_slice.dropna()
+fxps=fx_period_slice.reset_index()
 fxps0=fxps.index.values
 fxps1=fxps.Magnitude.values
 print(fxps0, fxps1)
@@ -38,7 +41,7 @@ print(fxps0, fxps1)
 NO=7
 #here since we have a lot of data, BinUp is the number of points per bin.
 #has strong effect on the pvalue, needs to be big enough to contain fundamental
-BinUp=10000
+BinUp=70
 #going to have to change the datetime index to a daycount index if i want halfway decent results
 
 
@@ -119,14 +122,6 @@ print(combined)
 stat_significant=combined.loc[combined.index < 0.05]
 print("The statistically significant identified periods, and their associated p and F-values are (in days): ")
 print(stat_significant)
-"""
-indexes=numpy.argpartition(p_value,5)[5:]
-print(indexes)
-print(minima[indexes[0]])
-print(minima[indexes[1]])
-print(minima[indexes[2]])
-print(minima[indexes[3]])
-print(minima[indexes[4]])"""
 
 #props will set up the conditions we like for the textbox in the graphs
 props = dict(boxstyle='round', facecolor='wheat', alpha=0.9)
@@ -135,11 +130,12 @@ props = dict(boxstyle='round', facecolor='wheat', alpha=0.9)
 #create each subplot for the input and output:
 #input
 plt.subplot(2,1,1)
-plt.title('Z-UMa data for:' + str(lowerdate) + " to "+ str(upperdate))
-plt.scatter(fxps0*NO,fxps1, s=2)
+plt.title('Z-UMa data for:' + str(loweryear) + " to "+ str(upperyear))
+plt.scatter(fx_period_slice.index,fxps1, s=2)
+plt.ylim(max(fxps1)+0.1, min(fxps1)-0.1)
 plt.ylabel('Magnitude')
 plt.xlabel('Days')
-plt.text(1,1,'input period 1 =' +str(period_1)+ "[days] \n "+" input period 2=" +str(period_2)+'[days]'+"\n "+" input period 3=" +str(period_3)+'[days]' + "\n Noise= normal dist with std of "+ str(stddevs),fontsize=7, bbox=props)
+#plt.text(1,1,'input period 1 =' +str(period_1)+ "[days] \n "+" input period 2=" +str(period_2)+'[days]'+"\n "+" input period 3=" +str(period_3)+'[days]' + "\n Noise= normal dist with std of "+ str(stddevs),fontsize=7, bbox=props)
 plt.tight_layout()
 plt.grid(True)
 #output

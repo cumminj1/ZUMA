@@ -1,0 +1,54 @@
+#interim report
+
+#what's the suss
+
+Z-Ursae Majoris (Z UMa) is a late type, semi-regular, circumpolar star (Srb)
+within the "belly" of the plough constellation in the N. hemisphere. It has a
+magnitude which typically varies by approximately 2 magnitudes, from 7.2 to 
+8.9 magnitudes at present and is at a distance of approximately 330pc
+from our own solar system. The periodicity of this star is poorly 
+defined, with a mean period of approx 195 days  but it shows irregular 
+changes in the light curve. It has been suggested that Z UMa 
+(and some other SRVs) might be multiply periodic. Z UMa was first 
+observed as variable by Dr E.S. King, from the Harvard College Observatory. 
+
+My project is based upon investigating and identifying any periodicities 
+present in the star and understanding some of the irregularities 
+associated with this star.  
+
+#what's been done
+
+The data being used for the investigation are amateur datasets from the 
+AAVSO and AFOEV, which date back to the 1920s. Given that the data on the 
+magnitude of the star is almost entirely estimates of the apparent visual
+magnitude by eye, cleaning this data to a usable state has taken considerable
+time. The visual estimate data was cleaned of entries with insufficient
+specificity, and a python script was written to further filter the data by
+extreme magnitude limiting, and by the number of entries by each observer,
+such that "fairweather" observers' data would not be considered as there was
+no measure of its consistency. With the cleaned data, a datetime conversion
+script was written, which converted the Julian Day Count of the data to a 
+simpler Gregorian calander entry, reindexed and set as datetime data to allow
+for easier identification of eras at a glance.
+
+The gregorian format data was run through a python script which calculated
+and returned means of the data, both moving averages and fixed averages, 
+generally with a 10-day average.
+
+The period of the cleaned data was analysed using a python script
+which based upon the Phase Dispersion Minimisation
+technique of Stellingwerf (1978)(Fourier Analysis does not handle data 
+with many gaps in it well), and a statistical analysis of results was
+carried out, yielding only results with a p-value less than 0.05. Although
+there was some variation across different eras of data, due to the irregular 
+nature of the star, two periods were clearly identified, the fundamental,
+with a period of 195.5 days, and the first overtone at 391 days. These 
+results are only preliminary however, and more analysis needs to be carried out.
+
+#What's to do
+The determined periodicities will still need some further work to ensure their
+accuracy and precision are acceptable. There have also been some unusuall deep
+minima in 2014, and I plan to investigate spectroscopic data on the star from
+the corresponding timespan, and the late 1940s show unusual behaviour in that
+the oscillation of the star seems to cease. This too will be investigated. Should
+time allow, I would also like to confirm my PDM results with wavelet analysis.

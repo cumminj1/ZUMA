@@ -20,10 +20,10 @@ import matplotlib.dates as mdates
 #"Magnitude"
 #Datetime index: "Gregorian"
 AAVSO1=pd.read_pickle("AAVSO2012")
-
+AAVSO1=pd.read_pickle("AAVSOCCD")
 
 #we set ndays to be the number of days we want our averages to cover
-ndays="7d"
+ndays="2d"
 ndaysfix=7
 
 occur=Counter(AAVSO1['Observer'])
@@ -118,15 +118,16 @@ fixedtest.to_pickle("AAVSO_processed_fixed")
 fig,(ax1, ax2)=plt.subplots(nrows=2,ncols=1)
 
 #plot the fixed averages
-fixedtest.plot(ax=ax1,style='m.', title="%i day fixed averages of ZUMa" %ndaysfix)
+fixedtest.plot(ax=ax1,style='c.', title="%i day fixed averages of ZUMa" %ndaysfix)
 ax1.set_ylabel('Apparent Visual Magnitude')
 ax1.set_ylim(max(fixedtest.Magnitude)+0.1, min(fixedtest.Magnitude)-0.1)
 ax1.grid(b=True, which='minor',  linewidth=.5)
 ax1.grid(b=True, which='major',  linewidth=1)
+#plt.plot(AAVSOccd["Gregorian"], AAVSOccd["Magnitude"], 'r.')
 plt.tight_layout()
 
 #plot the moving averages
-daymean.plot(ax=ax2,style='c.', title="%s moving averages of ZUMa" %ndays)
+daymean.plot(ax=ax2,style='m.', title="%s moving averages of ZUMa" %ndays)
 ax2.set_ylabel('Apparent Visual Magnitude')
 ax2.set_ylim(max(daymean.Magnitude)+0.1, min(daymean.Magnitude)-0.1)
 ax2.grid(b=True, which='minor',  linewidth=.5)

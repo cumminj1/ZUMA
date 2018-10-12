@@ -26,9 +26,9 @@ mvps1=mvps.Magnitude.values
 print(mvps0, mvps1)"""
 
 #fixed data
-fx_data=pd.read_pickle("AAVSO_processed_fixed")
-loweryear=2012
-upperyear=2018
+fx_data=pd.read_pickle("AFOEV_processed_fixed")
+loweryear=1972
+upperyear=2020
 lowerdate=fx_data.index.searchsorted(pd.datetime(loweryear,1,1))
 upperdate=fx_data.index.searchsorted(pd.datetime(upperyear,1,1))
 fx_period_slice=fx_data[lowerdate:upperdate]
@@ -41,7 +41,7 @@ print(fxps0, fxps1)
 NO=7
 #here since we have a lot of data, BinUp is the number of points per bin.
 #has strong effect on the pvalue, needs to be big enough to contain fundamental
-BinUp=70
+BinUp=1500
 #going to have to change the datetime index to a daycount index if i want halfway decent results
 
 
@@ -147,7 +147,7 @@ plt.text(0.85,0.85,'output periods are: \n' + str(stat_significant['Id Period'])
 plt.grid(True)
 #if using 10 day  etc
 plt.plot(f2*NO, t2, 'gp-')
-plt.plot(f1*NO,t1, 'rp-')
+#plt.plot(f1*NO,t1, 'rp-')
 #if using daycount
 #plt.plot(f2, t2, 'gp-')
 #plt.plot(f1,t1, 'rp-')

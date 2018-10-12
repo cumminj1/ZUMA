@@ -19,11 +19,12 @@ import matplotlib.dates as mdates
 #"Observer"
 #"Magnitude"
 #Datetime index: "Gregorian"
-AAVSO1=pd.read_pickle("AAVSO2012")
-AAVSO1=pd.read_pickle("AAVSOCCD")
+#AAVSO1=pd.read_pickle("AAVSO2012")
+#AAVSO1=pd.read_pickle("AAVSOCCD")
+AAVSO1=pd.read_pickle("AFOEV")
 
 #we set ndays to be the number of days we want our averages to cover
-ndays="2d"
+ndays="7d"
 ndaysfix=7
 
 occur=Counter(AAVSO1['Observer'])
@@ -36,7 +37,7 @@ print(" ")
 #We create an empty list of approved users and "no" sets out how far down the list of most prolific we go
 #here 147 is chosen so as to exlude those with under 100 observations
 safe=[]
-no=5
+no=150
 
 #for loop through the observers, taking the observers with greatest number of observations
 #we appent the list.
@@ -103,7 +104,8 @@ filtered4=filtered4.sort_index()
 #we use the timeperiod so the data is gropued by timeperiod rather than the number of entries
 daymean=filtered4.rolling(ndays,min_periods=1 ).mean()
 daymean=daymean[~daymean.index.duplicated(keep='first')]
-daymean.to_pickle("AAVSO_processed_moving")
+#daymean.to_pickle("AAVSO_processed_moving")
+daymean.to_pickle("AFOEV_processed_moving")
 print("The rolling mean magnitude values (visual) are: ")
 print(daymean)
 
@@ -113,7 +115,8 @@ filtered4.Magnitude=pd.to_numeric( filtered4['Magnitude'], errors='coerce')
 fixedtest=filtered4.resample(ndays).mean()
 
 
-fixedtest.to_pickle("AAVSO_processed_fixed")
+#fixedtest.to_pickle("AAVSO_processed_fixed")
+fixedtest.to_pickle("AFOEV_processed_fixed")
 #plt.figure()
 fig,(ax1, ax2)=plt.subplots(nrows=2,ncols=1)
 

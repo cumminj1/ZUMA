@@ -27,6 +27,7 @@ print(" ")
 print("the header data unit is")
 print(" ")
 hdu=spectrum_1[0]
+hdu_2=spectrum_1[0].data
 print(hdu)
 print(" ")
 
@@ -43,7 +44,14 @@ mid_time=hdu.header['JD-MID']
 print('Observation was started at: ['+ str(start_time) +"] in Julian Day")
 print(" ")
 print("Observation mid-point was at: [" + str(mid_time)+ "] in Julian Day")
+print(spectrum_2)
 
-plt.imshow(spectrum_2)
-#plt.figure()
-#
+wl=spectrum_2[0]
+flux=spectrum_2[1]
+
+
+plt.plot(wl,flux, label=("Julian: "+str(mid_time)))
+plt.title("Spectral data for Z-UMa, JD" + str(mid_time))
+plt.xlabel("Wavelength [Angstroms]")
+plt.ylabel("Flux [erg/cm2/s/A]")
+plt.legend()

@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+This script is a revised version of the datafiltering script
+used to clean up the large amateur datasets. The script uses 
+max and minimum magnitude filters, and allows you to filter by 
+user also. The data are then grouped by N-day means, using both
+fixed and moving means.
+
+Data should be read from a pickle format to save on readtime
+
 Created on Wed Oct 10 15:12:00 2018
 
-@author: CUMMINJ1
+@author: Jeaic O Cuimin
 """
 
 #import the relevant packages
@@ -37,7 +45,7 @@ print(" ")
 #We create an empty list of approved users and "no" sets out how far down the list of most prolific we go
 #here 147 is chosen so as to exlude those with under 100 observations
 safe=[]
-no=150
+no=5
 
 #for loop through the observers, taking the observers with greatest number of observations
 #we appent the list.

@@ -2,9 +2,17 @@
 
 # -*- coding: utf-8 -*-
 """
+This script will run a pdm analysis on timeseries data where
+the index is a pandas datetime format. The data is read using a 
+pickle file to save read times. The upperdate and lowerdate allow
+you to choose what timeperiod you want to investigate, and as it uses
+a searchsort, if there's no data on the days you want, it will move to the
+nearest available date.
+
+
 Created on Fri Sep 14 17:15:48 2018
 
-@author: jeaic
+@author: Jeaic O Cuimin
 """
 
 import numpy
@@ -26,9 +34,9 @@ mvps1=mvps.Magnitude.values
 print(mvps0, mvps1)"""
 
 #fixed data
-fx_data=pd.read_pickle("AFOEV_processed_fixed")
-loweryear=1972
-upperyear=2020
+fx_data=pd.read_pickle("AAVSO_processed_fixed")
+loweryear=2012
+upperyear=2016
 lowerdate=fx_data.index.searchsorted(pd.datetime(loweryear,1,1))
 upperdate=fx_data.index.searchsorted(pd.datetime(upperyear,1,1))
 fx_period_slice=fx_data[lowerdate:upperdate]
@@ -41,13 +49,16 @@ print(fxps0, fxps1)
 NO=7
 #here since we have a lot of data, BinUp is the number of points per bin.
 #has strong effect on the pvalue, needs to be big enough to contain fundamental
-BinUp=1500
+BinUp=150
 #going to have to change the datetime index to a daycount index if i want halfway decent results
 
 
 
-
-
+#============================================================================
+#==========================simulated======================================
+#==========================dataset=========================================
+#============================================================================
+"""
 # Create artificial data
 period_1=(99)
 frequency_1=(1/period_1)
@@ -69,12 +80,15 @@ stddevs=1.0
 #shape our noise to the signal's dimensions
 noise=numpy.random.normal(0,stddevs,x.shape)
 #add to the signal
-y1=y+noise
-
+y1=y+noise"""
+#============================================================================
+#============================================================================
+#============================================================================
+#============================================================================
 
 # Get a ``scanner'', which defines the frequency interval to be checked.
 # Alternatively, also periods could be used instead of frequency.
-S = pyPDM.Scanner(minVal=0.05, maxVal=BinUp, dVal=0.1, mode="period")
+S = pyPDM.Scanner(minVal=0.5, maxVal=BinUp, dVal=.1, mode="period")
 
 # Carry out PDM analysis. Get frequency array
 # (f, note that it is frequency, because the scanner's

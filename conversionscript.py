@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-date conversion test script
+This script will import large datasets with the date in 
+Julian Day count and add append a column which has a Gregorian date.
+This is merely to make the timeperiods easier to identify from a human 
+perspective.
+
+The data is imported, converted to panda dataframe and saved using a pickle
+which can be used by other scripts and will save considerable time over having
+to read the data each time you want to use it.
+
+Jeaic O Cuimin
 """
 
 from convertdate import julianday
@@ -9,7 +18,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-#AAVSO1= pd.read_excel('ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar2012_aavsodat').dopna()
+#AAVSO1= pd.read_excel('ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar2012_aavsodat').dropna()
 #AAVSO2016=pd.read_csv("CCD.csv", sep=',', header=0)
 AAVSO2016=pd.read_csv("AFOEV.csv", sep=',', header=0)
 AAVSO2016=AAVSO2016.reindex()

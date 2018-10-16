@@ -36,6 +36,7 @@ for filename in os.listdir(folder):
          mid_time=hdu.header['JD-MID']
          wl=spectrum_2[0]
          flux=spectrum_2[1]
+         plt.style.use('dark_background')
          plt.plot(wl,flux, label=("Julian: "+str(mid_time)))
          plt.title("Spectral data for Z-UMa" )
          plt.xlabel("Wavelength [Angstroms]")
@@ -43,8 +44,8 @@ for filename in os.listdir(folder):
          plt.xlim(3750,8000)
          plt.ylim(0, 7e-11)
          plt.legend()
-         #plt.savefig("/cphys/ugrad/2015-16/JF/CUMMINJ1/zuma/2014_spectra/spectrum_"+str(mid_time)+".png")
-         #plt.close()
-         plt.show()
+         plt.savefig("/cphys/ugrad/2015-16/JF/CUMMINJ1/zuma/2014_spectra/spectrum_"+str(mid_time)+".png")
+         plt.close()
+         #plt.show()
      else:
         print('none found')

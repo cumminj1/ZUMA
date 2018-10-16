@@ -308,12 +308,45 @@ the Datetime index with NaNs, but worried that they might affect the PDM results
 Tuesday, 9th Oct 2018
 __________________________________________________________________________________________
 __________________________________________________________________________________________
+I had the PDM data working and started using the AFOEV data for comparison, and it returns
+a similar, but not the same value for the primary period after being run through the script.
+We get a value of 190 rather than 195. interesting
 
+Wednesday, 10th Oct 2018
 __________________________________________________________________________________________
 __________________________________________________________________________________________
 
+Spent day polishing report mostly.
 
+Thursday, 11th Oct 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+Report submited and going through the AAVSO and AFOEV data, data request from AAVSO to update
+my data up to 2018. This allows me to see a particularly deep minimum which was reported in 
+2014, although it also seems to be present 2 years later in 2016. Waiting to hear if I'll
+get spectral data from Doctor David Boyd in the UK to analyse the timeperiod
 
+Friday, 12th Oct 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+Doctor Boyd got back to me and said I could use his data. Asked what format, and what 
+specific data
+
+Saturday, 13th Oct 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+Dr Boyd sent the data
+
+Sunday, 14th Oct 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
+Have been trying to read the data, but it seems to be only 1 dimensional. Ive tried opening 
+it but i only seem to be getting a wavelength axis. Emailed Brian to see if I'm doing anything
+wrong before I contact Dr Boyd again
+
+Monday, 15th Oct 2018
+__________________________________________________________________________________________
+__________________________________________________________________________________________
 
 
 

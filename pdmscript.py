@@ -34,9 +34,9 @@ mvps1=mvps.Magnitude.values
 print(mvps0, mvps1)"""
 
 #fixed data
-fx_data=pd.read_pickle("AAVSO_processed_fixed")
-loweryear=2012
-upperyear=2016
+fx_data=pd.read_pickle("AAVSO_full_dataset_cleanup")
+loweryear=1950
+upperyear=2018
 lowerdate=fx_data.index.searchsorted(pd.datetime(loweryear,1,1))
 upperdate=fx_data.index.searchsorted(pd.datetime(upperyear,1,1))
 fx_period_slice=fx_data[lowerdate:upperdate]
@@ -46,10 +46,10 @@ fxps0=fxps.index.values
 fxps1=fxps.Magnitude.values
 print(fxps0, fxps1)
 #the day averages
-NO=7
+NO=10
 #here since we have a lot of data, BinUp is the number of points per bin.
 #has strong effect on the pvalue, needs to be big enough to contain fundamental
-BinUp=150
+BinUp=2500
 #going to have to change the datetime index to a daycount index if i want halfway decent results
 
 
@@ -98,7 +98,7 @@ S = pyPDM.Scanner(minVal=0.5, maxVal=BinUp, dVal=.1, mode="period")
 P = pyPDM.PyPDM(fxps0, fxps1)   #fixed data
 #P = pyPDM.PyPDM(mvps0,mvps1)    #moving data
 
-f1, t1 = P.pdmEquiBinCover(20, 3, S)
+f1, t1 = P.pdmEquiBinCover(10, 3, S)
 #PDM analysis using  bins (no covers).
 M=5
 
@@ -138,14 +138,15 @@ print("The statistically significant identified periods, and their associated p 
 print(stat_significant)
 
 #props will set up the conditions we like for the textbox in the graphs
-props = dict(boxstyle='round', facecolor='wheat', alpha=0.9)
+props = dict(boxstyle='round', facecolor='indigo', alpha=0.9)
 
 
 #create each subplot for the input and output:
 #input
+plt.style.use('dark_background')
 plt.subplot(2,1,1)
 plt.title('Z-UMa data for:' + str(loweryear) + " to "+ str(upperyear))
-plt.scatter(fx_period_slice.index,fxps1, s=2)
+plt.scatter(fx_period_slice.index,fxps1, s=2, color='magenta')
 plt.ylim(max(fxps1)+0.1, min(fxps1)-0.1)
 plt.ylabel('Magnitude')
 plt.xlabel('Days')
@@ -157,7 +158,7 @@ plt.subplot(2,1,2)
 plt.title("Result of PDM analysis ")
 plt.xlabel("Period[days]")
 plt.ylabel("Theta")
-plt.text(0.85,0.85,'output periods are: \n' + str(stat_significant['Id Period'])+'',fontsize=7, bbox=props)
+plt.text(850,0.85,'output periods are: \n' + str(stat_significant['Id Period'])+'',fontsize=7, bbox=props)
 plt.grid(True)
 #if using 10 day  etc
 plt.plot(f2*NO, t2, 'gp-')

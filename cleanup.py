@@ -29,11 +29,11 @@ import matplotlib.dates as mdates
 #Datetime index: "Gregorian"
 #AAVSO1=pd.read_pickle("AAVSO2012")
 #AAVSO1=pd.read_pickle("AAVSOCCD")
-AAVSO1=pd.read_pickle("AFOEV")
+AAVSO1=pd.read_pickle("AAVSO_full_dataset_conversion")
 
 #we set ndays to be the number of days we want our averages to cover
-ndays="7d"
-ndaysfix=7
+ndays="10d"
+ndaysfix=10
 
 occur=Counter(AAVSO1['Observer'])
 print(" ")
@@ -124,11 +124,14 @@ fixedtest=filtered4.resample(ndays).mean()
 
 
 #fixedtest.to_pickle("AAVSO_processed_fixed")
-fixedtest.to_pickle("AFOEV_processed_fixed")
+fixedtest.to_pickle("AAVSO_full_dataset_cleanup")
+#fixedtest.to_pickle("AFOEV_processed_fixed")
 #plt.figure()
 fig,(ax1, ax2)=plt.subplots(nrows=2,ncols=1)
 
 #plot the fixed averages
+
+plt.style.use('dark_background')
 fixedtest.plot(ax=ax1,style='c.', title="%i day fixed averages of ZUMa" %ndaysfix)
 ax1.set_ylabel('Apparent Visual Magnitude')
 ax1.set_ylim(max(fixedtest.Magnitude)+0.1, min(fixedtest.Magnitude)-0.1)

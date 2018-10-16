@@ -342,12 +342,22 @@ ________________________________________________________________________________
 __________________________________________________________________________________________
 Have been trying to read the data, but it seems to be only 1 dimensional. Ive tried opening 
 it but i only seem to be getting a wavelength axis. Emailed Brian to see if I'm doing anything
-wrong before I contact Dr Boyd again
+wrong before I contact Dr Boyd again. Had some issue at first but finally got the spectra 
+from the fits files working properly. Wrote a looping script which would reach into the containing
+folder and cycle through, plotting the fits files
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/dark_spectra.png)
 
 Monday, 15th Oct 2018
 __________________________________________________________________________________________
 __________________________________________________________________________________________
+Finally merged the AAVSO files into a csv which covers 1920s up to 2018 and ran some more 
+analysis. In order to make the graphs more legible, I converted the colour scheme so that they
+would match a dark background. Reading up on analysing the spectrum of the star to see if 
+I can see any mechanistic data for changes
 
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/darkmovingfixed.png)
+Tuesday, 16 Oct 2018
 
 
 

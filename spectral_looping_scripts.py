@@ -24,6 +24,13 @@ import os
 
 folder='/cphys/ugrad/2015-16/JF/CUMMINJ1/zuma/2014_spectra/'
 
+
+
+
+
+
+
+
 for filename in os.listdir(folder):
      if filename.endswith(".fit"):
          print(filename)

@@ -34,7 +34,8 @@ mvps1=mvps.Magnitude.values
 print(mvps0, mvps1)"""
 
 #fixed data
-fx_data=pd.read_pickle("AAVSO_full_dataset_cleanup")
+#fx_data=pd.read_pickle("AAVSO_full_dataset_cleanup")
+fx_data=pd.read_pickle('AFOEV_processed_fixed')
 loweryear=1950
 upperyear=2018
 lowerdate=fx_data.index.searchsorted(pd.datetime(loweryear,1,1))
@@ -49,7 +50,7 @@ print(fxps0, fxps1)
 NO=10
 #here since we have a lot of data, BinUp is the number of points per bin.
 #has strong effect on the pvalue, needs to be big enough to contain fundamental
-BinUp=2500
+BinUp=300
 #going to have to change the datetime index to a daycount index if i want halfway decent results
 
 

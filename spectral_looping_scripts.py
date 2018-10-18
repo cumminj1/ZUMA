@@ -51,7 +51,7 @@ for filename in os.listdir(folder):
          plt.xlim(3750,8000)
          plt.ylim(0, 7e-11)
          plt.legend()
-         plt.savefig("/cphys/ugrad/2015-16/JF/CUMMINJ1/zuma/2014_spectra/spectrum_"+str(mid_time)+".png")
+         plt.savefig("/cphys/ugrad/2015-16/JF/CUMMINJ1/zuma/2014_spectra/spectrum_"+str(filename)+".png")
          plt.close()
          #plt.show()
      else:

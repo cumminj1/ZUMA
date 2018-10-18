@@ -19,8 +19,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #AAVSO1= pd.read_excel('ZUMa_AFOEV_AAVSO.xlsx', sheet_name='ZUMa_4Mar1920_1Mar2012_aavsodat').dropna()
-#AAVSO2016=pd.read_csv("CCD.csv", sep=',', header=0)
-AAVSO2016=pd.read_csv("AAVSO_full_dataset.csv", sep=',', header=0)
+AAVSO2016=pd.read_csv("AFOEV.csv", sep=',', header=0)
+#AAVSO2016=pd.read_csv("AAVSO_full_dataset.csv", sep=',', header=0)
 AAVSO2016=AAVSO2016.reindex()
 #take the specific date column needed
 #jul=AAVSO1['JD']
@@ -47,8 +47,8 @@ df2012["Gregorian"]=pd.to_datetime(df2012["Gregorian"], errors='coerce')
 df2012=df2012.drop(columns=[0,1,2])
 df2012=df2012.set_index(df2012["Gregorian"])
 print(df2012)
-#df2012.to_pickle("AAVSOCCD")
-df2012.to_pickle("AAVSO_full_dataset_conversion")
+df2012.to_pickle("AFOEV")
+#df2012.to_pickle("AAVSO_full_dataset_conversion")
 
 
 

@@ -27,9 +27,9 @@ import matplotlib.dates as mdates
 #"Observer"
 #"Magnitude"
 #Datetime index: "Gregorian"
-#AAVSO1=pd.read_pickle("AAVSO2012")
+AAVSO1=pd.read_pickle("AFOEV")
 #AAVSO1=pd.read_pickle("AAVSOCCD")
-AAVSO1=pd.read_pickle("AAVSO_full_dataset_conversion")
+#AAVSO1=pd.read_pickle("AAVSO_full_dataset_conversion")
 
 #we set ndays to be the number of days we want our averages to cover
 ndays="10d"
@@ -125,7 +125,7 @@ fixedtest=filtered4.resample(ndays).mean()
 
 #fixedtest.to_pickle("AAVSO_processed_fixed")
 fixedtest.to_pickle("AAVSO_full_dataset_cleanup")
-#fixedtest.to_pickle("AFOEV_processed_fixed")
+fixedtest.to_pickle("AFOEV_processed_fixed")
 #plt.figure()
 fig,(ax1, ax2)=plt.subplots(nrows=2,ncols=1)
 

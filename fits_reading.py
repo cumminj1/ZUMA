@@ -23,11 +23,12 @@ for filename in os.listdir(folder):
          spectrum_2=pyasl.read1dFitsSpec(str(folder)+'/'+str(filename))  
          wl=spectrum_2[0]
          flux=spectrum_2[1]
-         print("AAAAYYYYYY WE CHILLLLL")
-         plt.plot(wl,flux*(1e-11), alpha=0.25, label=str(filename[:-4]))
+         print("Fits file "+str(filename)+ " successfully read")
+         plt.plot(wl,flux, alpha=0.25, label=str(filename[:-4]))
          plt.title("Reference Spectra M(n)III stars for Z-UMa" )
          plt.xlabel("Wavelength [Angstroms]")
          plt.ylabel("Flux [erg/cm2/s/A]")
+         plt.ylim([0,14])
          plt.xlim(3750,8000)
          #plt.show()
 
@@ -84,8 +85,8 @@ wl_max=spectrum_max[0]
 flux_max=spectrum_max[1]
 
 #plotting the extracted data
-plt.plot(wl,flux, label=("Julian: "+str(mid_time))+"(minimum)", color='r')
-plt.plot(wl_max,flux_max, label=("Julian: "+str(mid_time))+"(maximum)", color='g')
+#plt.plot(wl,(flux*(3.5*10**(11))+0.45), label=("Julian: "+str(mid_time))+"(minimum)", color='r')
+plt.plot(wl_max,(flux_max*(1*10**(11))+0.005), label=("Julian: "+str(mid_time))+"(maximum)", color='g')
 #and plotting the reference spectrum
 #plt.plot(m7_ref_wl,m7_ref_flux, label=("M7 Reference Spectrum"))
 #plt.plot(refwl,refflux*1e-12)

@@ -360,7 +360,55 @@ I can see any mechanistic data for changes
 Tuesday, 16 Oct 2018
 
 
+_____________________________________________________________________________________
+_____________________________________________________________________________________
+In order to get some structural information on the star I want to be able to compare the
+spectra of the star to some reference spectra to see what kind of differences I can find in
+the star as it pulsates, I did some reading and found some MIII spectra from the PICKLES
+library of spectra (from ESO website). Also have been reading into astroseismology and 
+identifying stars' internal structure based upon spectra. If the resolution of the 
+spectrum was finer could see rotational splitting and then determine what comes from 
+which mode of rotation
 
+Wednesday, 17 Oct 2018
+
+_____________________________________________________________________________________
+_____________________________________________________________________________________
+On the back of yesterday I have been trying to compare the Boyd spectra to that of the 
+spectral library, but had some problems based upon the diferent sizes of the datasets.
+I feel it would make more sense to shrink the larger one down, rather than to interpolate
+upwards, but this is seeming to be more difficult than I anticipated, since I can't do
+any non-integer slicing, or resampling by final sample size. Will need to think on it a bit
+more
+
+Thurdsay, 18th Oct 2018
+
+_____________________________________________________________________________________
+_____________________________________________________________________________________
+A bit unwell so stayed at home and did some work, but no real breakthroughs here tbh
+
+Friday, 19th Oct 2018
+_____________________________________________________________________________________
+_____________________________________________________________________________________
+In Work
+
+Satruday, 19th Oct 2018
+_____________________________________________________________________________________
+_____________________________________________________________________________________
+In Work
+
+Sunday, 20th Oct 2018
+_____________________________________________________________________________________
+_____________________________________________________________________________________
+I was able to reduce the size of the dataset for the observed spectra such that it 
+matched the size of its reference spectra. I have now done this for both MAX and MIN
+of the star, and created some difference plots to see if there are emission features 
+which I can identify to show differences between the max and the min.
+
+![alt text](https://github.com/cumminj1/ZUMA/blob/master/4_spectra_difference_plot.png)
+
+_____________________________________________________________________________________
+_____________________________________________________________________________________
 
 
 

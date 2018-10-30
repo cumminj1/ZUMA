@@ -27,13 +27,13 @@ import matplotlib.dates as mdates
 #"Observer"
 #"Magnitude"
 #Datetime index: "Gregorian"
-AAVSO1=pd.read_pickle("AFOEV")
+#AAVSO1=pd.read_pickle("AFOEV")
 #AAVSO1=pd.read_pickle("AAVSOCCD")
-#AAVSO1=pd.read_pickle("AAVSO_full_dataset_conversion")
+AAVSO1=pd.read_pickle("AAVSO_full_dataset_conversion")
 
 #we set ndays to be the number of days we want our averages to cover
-ndays="10d"
-ndaysfix=10
+ndays="30d"
+ndaysfix=30
 
 occur=Counter(AAVSO1['Observer'])
 print(" ")
@@ -112,8 +112,8 @@ filtered4=filtered4.sort_index()
 #we use the timeperiod so the data is gropued by timeperiod rather than the number of entries
 daymean=filtered4.rolling(ndays,min_periods=1 ).mean()
 daymean=daymean[~daymean.index.duplicated(keep='first')]
-#daymean.to_pickle("AAVSO_processed_moving")
-daymean.to_pickle("AFOEV_processed_moving")
+daymean.to_pickle("AAVSO_processed_moving")
+#daymean.to_pickle("AFOEV_processed_moving")
 print("The rolling mean magnitude values (visual) are: ")
 print(daymean)
 
@@ -125,7 +125,7 @@ fixedtest=filtered4.resample(ndays).mean()
 
 #fixedtest.to_pickle("AAVSO_processed_fixed")
 fixedtest.to_pickle("AAVSO_full_dataset_cleanup")
-fixedtest.to_pickle("AFOEV_processed_fixed")
+#fixedtest.to_pickle("AFOEV_processed_fixed")
 #plt.figure()
 fig,(ax1, ax2)=plt.subplots(nrows=2,ncols=1)
 
@@ -135,8 +135,8 @@ plt.style.use('dark_background')
 fixedtest.plot(ax=ax1,style='c.', title="%i day fixed averages of ZUMa" %ndaysfix)
 ax1.set_ylabel('Apparent Visual Magnitude')
 ax1.set_ylim(max(fixedtest.Magnitude)+0.1, min(fixedtest.Magnitude)-0.1)
-ax1.grid(b=True, which='minor',  linewidth=.5)
-ax1.grid(b=True, which='major',  linewidth=1)
+ax1.grid(b=True, which='minor',  linewidth=.5, alpha=0.5)
+ax1.grid(b=True, which='major',  linewidth=1, alpha=0.5)
 #plt.plot(AAVSOccd["Gregorian"], AAVSOccd["Magnitude"], 'r.')
 plt.tight_layout()
 
@@ -144,6 +144,6 @@ plt.tight_layout()
 daymean.plot(ax=ax2,style='m.', title="%s moving averages of ZUMa" %ndays)
 ax2.set_ylabel('Apparent Visual Magnitude')
 ax2.set_ylim(max(daymean.Magnitude)+0.1, min(daymean.Magnitude)-0.1)
-ax2.grid(b=True, which='minor',  linewidth=.5)
-ax2.grid(b=True, which='major',  linewidth=1)
+ax2.grid(b=True, which='minor',  linewidth=.5, alpha=0.5)
+ax2.grid(b=True, which='major',  linewidth=1, alpha=0.5)
 plt.tight_layout()

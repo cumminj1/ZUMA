@@ -96,9 +96,10 @@ print("Interpolation successful..." )
 print("Preparing to plot..." )
 
 #now It's time to subtract them and see what's what
-spectral_difference_min= -flux_ref+flux_min_compress
-spectral_difference_max=-flux_ref_max+flux_max_compress
-#ind_min=np.argpartition(spectral_difference_min, -5)[-5:]
+spectral_difference_min=np.roll(flux_min_compress,-3) - flux_ref
+spectral_difference_max=np.roll(flux_max_compress,-3) - flux_ref_max
+
+#search for the biggest indexes to id the peaks
 ind_min = (spectral_difference_min).argsort()[-20:][::-1]
 ind_max=(spectral_difference_max).argsort()[-20:][::-1]
 min_vals= wl_ref[ind_min]
@@ -106,6 +107,11 @@ max_vals=wl_ref[ind_max]
 print("The peaks in the spectrum at min: "+str(min_vals))
 print(" ")
 print("The peaks in the spectrum at max"+str(max_vals))
+
+
+
+
+#lets create an empty figure for the plot
 fig=plt.figure
 #ploting the  reference spectrum beside the observed spectrum
 #plt.plot(wl_min,flux_min, color='m', label='spectrum at minimum [2014]')
@@ -121,13 +127,14 @@ plt.tight_layout()
 
 #the difference plot at min
 plt.subplot(2,2,2)
-plt.plot(wl_ref, spectral_difference_min, label="Observed Min - M7iii ")
+plt.plot(wl_ref, spectral_difference_min,  label="Observed Min - M7iii ")
 plt.axhline()
 plt.xlabel("Wavelength [$\AA$]")
 plt.ylabel("Flux [reference]")
 plt.title("Observed vs Reference - MIN")
 plt.tight_layout()
-plt.xlim([3750,7600])
+plt.xlim([4000,7500])
+plt.ylim([-3,2])
 plt.legend()
 
 #for the star at a max
@@ -144,12 +151,25 @@ plt.grid(linestyle='--', alpha=0.2)
 
 #the difference plot at max
 plt.subplot(2,2,4)
-plt.plot(wl_ref, spectral_difference_max, label="Observed Max - M4ii ")
+plt.plot(wl_ref_max, spectral_difference_max,label="Observed Max - M4ii ")
 plt.axhline()
 plt.xlabel("Wavelength [$\AA$]")
 plt.ylabel("Flux [reference]")
 plt.title("Observed vs Reference - MAX")
 plt.tight_layout()
-plt.xlim([3750,7600])
+plt.xlim([4000,7500])
+plt.ylim([min(spectral_difference_max),max(spectral_difference_max)])
 plt.legend()
 plt.show()
+
+"""
+#flux_max_compress=flux_max_compress[3:768]
+a=np.roll(flux_max_compress,-6)
+
+
+plt.plot(np.arange(0, len(flux_ref_max)), a,'c')
+
+plt.plot(np.arange(0, len(flux_ref_max)), flux_ref_max,'r')
+plt.show()
+"""
+

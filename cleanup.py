@@ -21,7 +21,7 @@ from collections import Counter
 from PyAstronomy.pyTiming import pyPDM
 import numpy as np
 import matplotlib.dates as mdates
-
+plt.style.use('dark_background')
 
 #the columns needed are:
 #"Observer"
@@ -131,7 +131,7 @@ fig,(ax1, ax2)=plt.subplots(nrows=2,ncols=1)
 
 #plot the fixed averages
 
-plt.style.use('dark_background')
+plt.style.context('dark_background')
 fixedtest.plot(ax=ax1,style='c.', title="%i day fixed averages of ZUMa" %ndaysfix)
 ax1.set_ylabel('Apparent Visual Magnitude')
 ax1.set_ylim(max(fixedtest.Magnitude)+0.1, min(fixedtest.Magnitude)-0.1)

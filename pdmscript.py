@@ -9,6 +9,10 @@ you to choose what timeperiod you want to investigate, and as it uses
 a searchsort, if there's no data on the days you want, it will move to the
 nearest available date.
 
+The code will also produce a histogram of the time from peak to peak and 
+trough to trough (not maximum to maximum etc) to check if there is an
+uneven distribution of days.
+
 
 Created on Fri Sep 14 17:15:48 2018
 
@@ -23,6 +27,7 @@ import pandas as pd
 import numpy as np
 import convertdate as cd
 import datetime
+plt.style.use('ggplot')
 #read the real data
 """mv_data=pd.read_pickle("AAVSO_processed_moving")
 print(mv_data)
@@ -37,12 +42,12 @@ mvps1=mvps.Magnitude.values
 print(mvps0, mvps1)"""
 
 
-"""
+
 #fixed data
 fx_data=pd.read_pickle("AAVSO_full_dataset_cleanup")
 #fx_data=pd.read_pickle('AFOEV_processed_fixed')
-loweryear=1920
-upperyear=2018
+loweryear=1980
+upperyear=1995
 lowerdate=fx_data.index.searchsorted(pd.datetime(loweryear,1,1))
 upperdate=fx_data.index.searchsorted(pd.datetime(upperyear,1,1))
 fx_period_slice=fx_data[lowerdate:upperdate]
@@ -50,15 +55,14 @@ fx_period_slice=fx_period_slice.dropna()
 fxps=fx_period_slice.reset_index()
 fxps0=fxps.index.values
 fxps1=fxps.Magnitude.values
-print(fxps0, fxps1)
+#print(fxps0, fxps1)
 #the day averages
 NO=30
 #here since we have a lot of data, BinUp is the number of points per bin.
 #has strong effect on the pvalue, needs to be big enough to contain fundamental
-BinUp=2500
+BinUp=750
 #going to have to change the datetime index to a daycount index if i want halfway decent results
 
-"""
 
 #============================================================================
 #==========================simulated======================================
@@ -91,7 +95,7 @@ y1=y+noise"""
 #============================================================================
 #============================================================================
 #============================================================================
-"""
+
 # Get a ``scanner'', which defines the frequency interval to be checked.
 # Alternatively, also periods could be used instead of frequency.
 S = pyPDM.Scanner(minVal=0.5, maxVal=BinUp, dVal=.1, mode="period")
@@ -142,45 +146,66 @@ print(combined)
 stat_significant=combined.loc[combined.index < 0.05]
 print("The statistically significant identified periods, and their associated p and F-values are (in days): ")
 print(stat_significant)
-"""
+
+
+
 #let's see about analysing the distance between minima
 #minima=np.array(minima)
 mv_curve=pd.read_pickle("AAVSO_processed_moving")
 
 periods=[]
+perpeak=[]
 deltas=[]
+delpeak=[]
 
 
 #let's scan through the moving average data for minima
 for i in range (len(mv_curve)-3):
     if i != 0 and i != 1 and i !=2:
         if mv_curve.Magnitude[i] < mv_curve.Magnitude[i+1] and mv_curve.Magnitude[i] < mv_curve.Magnitude[i-1] and mv_curve.Magnitude[i] < mv_curve.Magnitude[i-2]and mv_curve.Magnitude[i] < mv_curve.Magnitude[i-3]  and mv_curve.Magnitude[i] < mv_curve.Magnitude[i+2] and mv_curve.Magnitude[i] < mv_curve.Magnitude[i+3] :
-            print('Match found \r')
+            print('Match'+str([i])+ ' found... ... ...',end='\r')
             then: periods.append(mv_curve.index[i])
+            
+
+#same fo the peaks
+for i in range (len(mv_curve)-3):
+    if i != 0 and i != 1 and i !=2:
+        if mv_curve.Magnitude[i] > mv_curve.Magnitude[i+1] and mv_curve.Magnitude[i] > mv_curve.Magnitude[i-1] and mv_curve.Magnitude[i] > mv_curve.Magnitude[i-2]and mv_curve.Magnitude[i] > mv_curve.Magnitude[i-3]  and mv_curve.Magnitude[i] > mv_curve.Magnitude[i+2] and mv_curve.Magnitude[i] > mv_curve.Magnitude[i+3] :
+            print('Match'+str([i])+ ' found... ... ...',end='\r')
+            then: perpeak.append(mv_curve.index[i])
 
 #we now take a look at the time elapsed between magnitude minima for the 
 #specified timeperiod
 for i in range (len(periods)):
     if i != 0:
         timedelta=periods[i]-periods[i-1]
-        if timedelta > datetime.timedelta(days=15):
+        if timedelta > datetime.timedelta(days=50) and timedelta < datetime.timedelta(days=215):
             deltas.append(timedelta.total_seconds()/(60*60*24))
             
-#print the results
-print("The number of days from peak to peak are: " + str(deltas))
-plt.plot(np.arange(len(deltas)),deltas)
+#same for the peaks again
+for i in range (len(perpeak)):
+    if i != 0:
+        timedelta=perpeak[i]-perpeak[i-1]
+        if timedelta > datetime.timedelta(days=50) and timedelta < datetime.timedelta(days=215):
+            delpeak.append(timedelta.total_seconds()/(60*60*24))        
+
+#create side-by-side histograms to investigate the 
+#distribution of days from peak to peak and trough to trough
+plt.hist([deltas,delpeak],bins=25, alpha=0.5, label=["trough to trough","peak to peak"])
+plt.title("peak/peak trough/trough [Days]", color='b')
+plt.grid(True, alpha=0.75)
+plt.xlabel("Days")
+plt.ylabel('Frequency')
+legend=plt.legend()
+plt.setp(legend.get_texts(), color='black')
 plt.show()
 
 
 
-
-
-
-"""
 #props will set up the conditions we like for the textbox in the graphs
 props = dict(boxstyle='round', facecolor='indigo', alpha=0.9)
 
-
+"""
 #create each subplot for the input and output:
 #input
 plt.style.use('dark_background')
@@ -209,5 +234,5 @@ plt.plot(f2*NO, t2, 'gp-')
 plt.legend([" Bins without covers","Bins with covers"])
 plt.tight_layout()
 
-plt.show()
-plt.close()"""
+#plt.show()
+#plt.close()"""

@@ -46,8 +46,8 @@ print(mvps0, mvps1)"""
 #fixed data
 fx_data=pd.read_pickle("AAVSO_full_dataset_cleanup")
 #fx_data=pd.read_pickle('AFOEV_processed_fixed')
-loweryear=1980
-upperyear=1995
+loweryear=2010
+upperyear=2019
 lowerdate=fx_data.index.searchsorted(pd.datetime(loweryear,1,1))
 upperdate=fx_data.index.searchsorted(pd.datetime(upperyear,1,1))
 fx_period_slice=fx_data[lowerdate:upperdate]
@@ -55,9 +55,11 @@ fx_period_slice=fx_period_slice.dropna()
 fxps=fx_period_slice.reset_index()
 fxps0=fxps.index.values
 fxps1=fxps.Magnitude.values
+
+fxps.to_pickle("white")
 #print(fxps0, fxps1)
 #the day averages
-NO=30
+NO=15
 #here since we have a lot of data, BinUp is the number of points per bin.
 #has strong effect on the pvalue, needs to be big enough to contain fundamental
 BinUp=750
@@ -110,7 +112,7 @@ P = pyPDM.PyPDM(fxps0, fxps1)   #fixed data
 
 f1, t1 = P.pdmEquiBinCover(10, 3, S)
 #PDM analysis using  bins (no covers).
-M=5
+M=7
 
 f2, t2 = P.pdmEquiBin(M, S)
 #local minima empty list to be appended

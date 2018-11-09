@@ -33,3 +33,4 @@ y1=y+noise
 
 plt.plot(x,y, linewidth=3)
 plt.show()
+

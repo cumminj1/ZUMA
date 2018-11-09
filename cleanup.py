@@ -32,8 +32,8 @@ plt.style.use('dark_background')
 AAVSO1=pd.read_pickle("AAVSO_full_dataset_conversion")
 
 #we set ndays to be the number of days we want our averages to cover
-ndays="30d"
-ndaysfix=30
+ndays="15d"
+ndaysfix=15
 
 occur=Counter(AAVSO1['Observer'])
 print(" ")
